@@ -3,28 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WeatherApp.Models;
+using WeatherApp.Services;
 
 namespace WeatherApp.Controllers
 {
     public class HomeController : Controller
     {
+        private HomeService homeService;
+
+        public HomeController()
+        {
+            homeService = new HomeService();
+        }
+
+        /// <summary>
+        /// Get the data and load to the view
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Index()
-        {
-            return View();
+        {            
+            InitForm();
+            var weatherRequest = new WeatherRequest();
+            return View(weatherRequest);
         }
 
-        public ActionResult About()
+        /// <summary>
+        /// Save the data From View by posting method
+        /// </summary>
+        /// <param name="weatherRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Save(WeatherRequest wr)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            //save dato to database
+            return Content("Request success...");
         }
 
-        public ActionResult Contact()
+        private void InitForm()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            ViewBag.Cities = homeService.GetCities();
+            ViewBag.Periods = homeService.GetPeriods();
         }
     }
 }
