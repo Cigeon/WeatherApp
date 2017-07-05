@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,7 +16,6 @@ namespace WeatherApp.Services
         private string parameters;
         private string city;
 
-
         public OpenWeatherService()
         {
             // Initialize parameters
@@ -26,7 +26,7 @@ namespace WeatherApp.Services
         {
             token = WebConfigurationManager.AppSettings["OpenWeatherToken"];
             uri = WebConfigurationManager.AppSettings["OpenWeatherUri"];
-            parameters = "";
+            //parameters = "";
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace WeatherApp.Services
         /// </summary>
         /// <param name="weatherRequest"></param>
         /// <returns></returns>
-        public string Download(WeatherRequest weatherRequest)
+        public WeatherResponse Download(WeatherRequest weatherRequest)
         {
             // Define city for weather forecast
             city = weatherRequest.City;
@@ -55,6 +55,7 @@ namespace WeatherApp.Services
             parameters += "?q=";
             parameters += city;
             parameters += ",uk";
+            parameters += "&units=metric";
 
             // Set number of days for forecast
             if (weatherRequest.Period.Equals("3 days"))
@@ -71,17 +72,26 @@ namespace WeatherApp.Services
 
             // Get data from open weather
             var client = new WebClient();
-            var text = client.DownloadString(uri);
+            var json = client.DownloadString(uri);
 
-            
+            // Deserialize json
+            // current weather
+            if (weatherRequest.Period.Equals("Now"))
+            {
+                var data = JsonConvert.DeserializeObject<ResponseCurrentWeather>(json);
+                data.req = weatherRequest;
+                return data;
+            }
+                      
+            // weather 3 days / 7 days forecast
+            if (weatherRequest.Period.Equals("3 days") || weatherRequest.Period.Equals("7 days"))
+            { 
+                var data = JsonConvert.DeserializeObject<ResponseWeatherForecast>(json);
+                data.req = weatherRequest;
+                return data;
+            }
 
-            var t = token;
-            return text;
-            //using (WebClient wc = new WebClient())
-            //{
-            //    wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
-            //    string HtmlResult = wc.UploadString(uri, myParameters);
-            //}
+            return null;
         }
     }
 }

@@ -5,7 +5,12 @@ using System.Web;
 
 namespace WeatherApp.Models
 {
-    public class ResponseCurrentWeather
+    public abstract class WeatherResponse
+    {
+    }
+
+    // Response model for current weather
+    public class ResponseCurrentWeather : WeatherResponse
     {
         public Coord coord { get; set; }
         public List<Weather> weather { get; set; }
@@ -19,6 +24,18 @@ namespace WeatherApp.Models
         public int id { get; set; }
         public string name { get; set; }
         public int cod { get; set; }
+        public WeatherRequest req { get; set; }
+    }
+
+    // Response model for weather 3 days / 7 days forecast
+    public class ResponseWeatherForecast : WeatherResponse
+    {
+        public City city { get; set; }
+        public string cod { get; set; }
+        public double message { get; set; }
+        public int cnt { get; set; }
+        public List<List> list { get; set; }
+        public WeatherRequest req { get; set; }
     }
 
     public class Coord
@@ -65,4 +82,34 @@ namespace WeatherApp.Models
         public int sunset { get; set; }
     }
 
+    public class City
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public Coord coord { get; set; }
+        public string country { get; set; }
+        public int population { get; set; }
+    }
+
+    public class Temp
+    {
+        public double day { get; set; }
+        public double min { get; set; }
+        public double max { get; set; }
+        public double night { get; set; }
+        public double eve { get; set; }
+        public double morn { get; set; }
+    }
+
+    public class List
+    {
+        public int dt { get; set; }
+        public Temp temp { get; set; }
+        public double pressure { get; set; }
+        public int humidity { get; set; }
+        public List<Weather> weather { get; set; }
+        public double speed { get; set; }
+        public int deg { get; set; }
+        public int clouds { get; set; }
+    }
 }
