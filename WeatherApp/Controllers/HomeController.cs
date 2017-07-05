@@ -11,14 +11,16 @@ namespace WeatherApp.Controllers
     public class HomeController : Controller
     {
         private HomeService homeService;
+        private OpenWeatherService openWeather;
 
         public HomeController()
         {
             homeService = new HomeService();
+            openWeather = new OpenWeatherService();
         }
 
         /// <summary>
-        /// Get the data and load to the view
+        /// Get data and load to the view
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -30,17 +32,21 @@ namespace WeatherApp.Controllers
         }
 
         /// <summary>
-        /// Save the data From View by posting method
+        /// Get data from open weather
         /// </summary>
         /// <param name="weatherRequest"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Save(WeatherRequest wr)
+        public ActionResult GetWeather(WeatherRequest weatherRequest)
         {
-            //save dato to database
-            return Content("Request success...");
+            //
+            var weatherResponse = openWeather.Download(weatherRequest);
+            return Content(weatherResponse);
         }
 
+        /// <summary>
+        /// Initialize controls
+        /// </summary>
         private void InitForm()
         {
             ViewBag.Cities = homeService.GetCities();
