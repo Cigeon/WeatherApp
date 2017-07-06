@@ -60,8 +60,11 @@ namespace WeatherApp.Services
             uri += parameters;
 
             // Get data from open weather
-            var client = new WebClient();
-            var json = client.DownloadString(uri);
+            var json = "";
+            using (var client = new WebClient())
+            {
+                json = client.DownloadString(uri);
+            }
 
             // Deserialize json
             var data = JsonConvert.DeserializeObject<ResponseCurrentWeather>(json);
@@ -108,8 +111,11 @@ namespace WeatherApp.Services
             uri += parameters;
 
             // Get data from open weather
-            var client = new WebClient();
-            var json = client.DownloadString(uri);
+            var json = "";
+            using (var client = new WebClient())
+            {
+                json = client.DownloadString(uri);
+            }         
 
             // Deserialize json
             var data = JsonConvert.DeserializeObject<ResponseWeatherForecast>(json);

@@ -13,7 +13,7 @@
     }
 }
 
-<h2>@Model.reqCity, wather forecast for @Model.reqPeriod</h2>
+<h2>@Model.reqCity (@Model.city.name), wather forecast for @Model.reqPeriod</h2>
 <br />
 <br />
 <table class="table">
@@ -103,6 +103,8 @@
         </tr>
     </tbody>
 </table>
+<br />
+<a href="javascript:history.back()" class="btn btn-primary">Back</a>
 <br />
 <br />
 <br />
