@@ -154,6 +154,24 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\01d.png" />
+    <Content Include="Content\Images\01n.png" />
+    <Content Include="Content\Images\02d.png" />
+    <Content Include="Content\Images\02n.png" />
+    <Content Include="Content\Images\03d.png" />
+    <Content Include="Content\Images\03n.png" />
+    <Content Include="Content\Images\04d.png" />
+    <Content Include="Content\Images\04n.png" />
+    <Content Include="Content\Images\09d.png" />
+    <Content Include="Content\Images\09n.png" />
+    <Content Include="Content\Images\10d.png" />
+    <Content Include="Content\Images\10n.png" />
+    <Content Include="Content\Images\11d.png" />
+    <Content Include="Content\Images\11n.png" />
+    <Content Include="Content\Images\13d.png" />
+    <Content Include="Content\Images\13n.png" />
+    <Content Include="Content\Images\50d.png" />
+    <Content Include="Content\Images\50n.png" />
     <Content Include="Content\Images\weather_icon_128x128.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

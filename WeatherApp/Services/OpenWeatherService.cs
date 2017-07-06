@@ -30,11 +30,11 @@ namespace WeatherApp.Services
         }
 
         /// <summary>
-        /// Download weather data from open weather 
+        /// Download current weather data from open weather 
         /// </summary>
         /// <param name="weatherRequest"></param>
         /// <returns></returns>
-        public WeatherResponse Download(WeatherRequest weatherRequest)
+        public ResponseCurrentWeather GetCurrentWeather(WeatherRequest weatherRequest)
         {
             // Define city for weather forecast
             city = weatherRequest.City;
@@ -44,12 +44,49 @@ namespace WeatherApp.Services
                 city = weatherRequest.CustomCity;
 
             // Uri paramers for current wather data
-            if (weatherRequest.Period.Equals("Now"))
-                parameters += "weather";
+            parameters += "weather";
+
+            // Set city parameter
+            parameters += "?q=";
+            parameters += city;
+            parameters += ",uk";
+            parameters += "&units=metric";
+
+            // Set token
+            parameters += "&appid=";
+            parameters += token;
+
+            // Add parameters to uri
+            uri += parameters;
+
+            // Get data from open weather
+            var client = new WebClient();
+            var json = client.DownloadString(uri);
+
+            // Deserialize json
+            var data = JsonConvert.DeserializeObject<ResponseCurrentWeather>(json);
+            data.reqCity = city;
+            data.reqPeriod = weatherRequest.Period;
+            //data.req = weatherRequest;
+            return data;
+        }
+
+        /// <summary>
+        /// Download weather forecast data from open weather 
+        /// </summary>
+        /// <param name="weatherRequest"></param>
+        /// <returns></returns>
+        public ResponseWeatherForecast GetWeatherForecast(WeatherRequest weatherRequest)
+        {
+            // Define city for weather forecast
+            city = weatherRequest.City;
+
+            // Check if custom city was typed
+            if (weatherRequest.CustomCity != null)
+                city = weatherRequest.CustomCity;
 
             // Uri parameters for 3 days / 7 days forecast
-            if (weatherRequest.Period.Equals("3 days") || weatherRequest.Period.Equals("7 days"))
-                parameters += "forecast/daily";
+            parameters += "forecast/daily";
 
             // Set city parameter
             parameters += "?q=";
@@ -75,23 +112,12 @@ namespace WeatherApp.Services
             var json = client.DownloadString(uri);
 
             // Deserialize json
-            // current weather
-            if (weatherRequest.Period.Equals("Now"))
-            {
-                var data = JsonConvert.DeserializeObject<ResponseCurrentWeather>(json);
-                data.req = weatherRequest;
-                return data;
-            }
-                      
-            // weather 3 days / 7 days forecast
-            if (weatherRequest.Period.Equals("3 days") || weatherRequest.Period.Equals("7 days"))
-            { 
-                var data = JsonConvert.DeserializeObject<ResponseWeatherForecast>(json);
-                data.req = weatherRequest;
-                return data;
-            }
+            var data = JsonConvert.DeserializeObject<ResponseWeatherForecast>(json);
+            data.reqCity = city;
+            data.reqPeriod = weatherRequest.Period;
+            //data.req = weatherRequest;
 
-            return null;
+            return data;
         }
     }
 }

@@ -40,16 +40,18 @@ namespace WeatherApp.Controllers
         public ActionResult GetWeather(WeatherRequest weatherRequest)
         {
             // Get data from open weather
-            var weatherResponse = openWeather.Download(weatherRequest);
-
-            // Select view
-            var viewName = "";
             if (weatherRequest.Period.Equals("Now"))
-                viewName = "ViewCurrentWeather";
+            {                
+                var weatherResponse = openWeather.GetCurrentWeather(weatherRequest);
+                return View("ViewCurrentWeather", weatherResponse);
+            }
             if (weatherRequest.Period.Equals("3 days") || weatherRequest.Period.Equals("7 days"))
-                viewName = "ViewWeatherForecast";
+            {
+                var weatherResponse = openWeather.GetWeatherForecast(weatherRequest);
+                return View("ViewWeatherForecast", weatherResponse);
+            }
 
-            return View(viewName, weatherResponse);
+            return View("Error");
         }
 
         /// <summary>

@@ -1,8 +1,112 @@
-﻿
+﻿@model WeatherApp.Models.ResponseWeatherForecast
+
 @{
-    ViewBag.Title = "ViewWeatherForecast";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewWeatherForecast</h2>
+@functions{
+    public string ConvertToDateTime(int dt)
+    {
+        var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        dateTime = dateTime.AddSeconds(dt).ToLocalTime();
+        return dateTime.ToString("m");
+    }
+}
+
+<h2>@Model.reqCity, wather forecast for @Model.reqPeriod</h2>
+<br />
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            @foreach (var item in Model.list)
+            {
+                <th>
+                    @ConvertToDateTime(item.dt)
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Temperature, °C</th>
+            @foreach (var item in Model.list)
+            {
+                <td>
+                    @item.temp.min ... @item.temp.max
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>Pressure, mmHg</th>
+            @foreach (var item in Model.list)
+            {
+                <td>
+                    @item.pressure
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>Humidity, %</th>
+            @foreach (var item in Model.list)
+            {
+                <td>
+                    @item.humidity
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>Wind speed , m/s</th>
+            @foreach (var item in Model.list)
+            {
+                <td>
+                    @item.speed
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>Wind direction, ∠</th>
+            @foreach (var item in Model.list)
+            {
+                <td>
+                    @item.deg
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>Cloudiness, %</th>
+            @foreach (var item in Model.list)
+            {
+                <td>
+                    @item.clouds
+                </td>
+            }
+        </tr>        
+        <tr>
+            <th>Description</th>
+            @foreach (var item in Model.list)
+            {
+                <td>
+                    @item.weather[0].description
+                </td>
+            }
+        </tr>  
+        <tr>
+            <th>Icon</th>
+            @foreach (var item in Model.list)
+            {
+                <td>
+                    <img src="../Content/Images/@(item.weather[0].icon).png" alt="Weather icon" />
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>
+<br />
+<br />
+<br />
+
+
+    
 
