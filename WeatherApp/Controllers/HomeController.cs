@@ -40,11 +40,6 @@ namespace WeatherApp.Controllers
         [HttpPost]
         public ActionResult GetWeather(WeatherRequest weatherRequest)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    ViewBag.Custom = weatherRequest.CustomCity;
-            //}
-
             try
             {
                 // Get data from open weather
