@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,12 +13,13 @@ namespace WeatherApp.Controllers
     public class HomeController : Controller
     {
         private HomeService homeService;
-        private OpenWeatherService openWeather;
+        private IWeatherService weatherService;
 
-        public HomeController()
-        {
+        public HomeController(IWeatherService weatherParam)
+        {            
             homeService = new HomeService();
-            openWeather = new OpenWeatherService();
+            // Get weather service from Ninject
+            weatherService = weatherParam;
         }
 
         /// <summary>
@@ -42,17 +44,13 @@ namespace WeatherApp.Controllers
         {
             try
             {
-                // Get data from open weather
-                if (weatherRequest.Period.Equals("Now"))
+                var weatherProvider = new WeatherProvider(weatherService)
                 {
-                    var weatherResponse = openWeather.GetCurrentWeather(weatherRequest);
-                    return View("ViewCurrentWeather", weatherResponse);
-                }
-                if (weatherRequest.Period.Equals("3 days") || weatherRequest.Period.Equals("7 days"))
-                {
-                    var weatherResponse = openWeather.GetWeatherForecast(weatherRequest);
-                    return View("ViewWeatherForecast", weatherResponse);
-                }
+                    WeatherRequest = weatherRequest
+                };
+                //Get data from open weather
+                var weatherResponse = weatherProvider.GetForecast();
+                return View("ViewWeatherForecast", weatherResponse);
             }
             catch (WebException webEx)
             {

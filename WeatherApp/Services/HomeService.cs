@@ -35,9 +35,9 @@ namespace WeatherApp.Services
         public List<SelectListItem> GetPeriods()
         {
             List<SelectListItem> periods = new List<SelectListItem>();
-            periods.Add(new SelectListItem() { Text = "Current weather", Value = "Now" });
-            periods.Add(new SelectListItem() { Text = "For 3 days", Value = "3 days" });
-            periods.Add(new SelectListItem() { Text = "For 7 days", Value = "7 days" });
+            periods.Add(new SelectListItem() { Text = "Current weather", Value = "1" });
+            periods.Add(new SelectListItem() { Text = "For 3 days", Value = "3" });
+            periods.Add(new SelectListItem() { Text = "For 7 days", Value = "7" });
             return periods;
         }
     }
