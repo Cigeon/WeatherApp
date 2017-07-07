@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
-    public class HomeService
+    public class DebugParamsService : IParametersService
     {
-        public HomeService()
+        public DebugParamsService()
         {
 
         }
@@ -21,11 +20,11 @@ namespace WeatherApp.Services
         public List<SelectListItem> GetCities()
         {
             List<SelectListItem> cities = new List<SelectListItem>();
-            cities.Add(new SelectListItem() { Text = "Kyiv", Value = "Kyiv" });
-            cities.Add(new SelectListItem() { Text = "Lviv", Value = "Lviv" });
-            cities.Add(new SelectListItem() { Text = "Kharkiv", Value = "Kharkiv" });
-            cities.Add(new SelectListItem() { Text = "Dnipro", Value = "Dnipro" });
-            cities.Add(new SelectListItem() { Text = "Odessa", Value = "Odessa" });
+            cities.Add(new SelectListItem() { Text = "Poltava", Value = "Poltava" });
+            cities.Add(new SelectListItem() { Text = "Vinnitsa", Value = "Vinnitsa" });
+            cities.Add(new SelectListItem() { Text = "Chernihiv", Value = "Chernihiv" });
+            cities.Add(new SelectListItem() { Text = "Luhansk", Value = "Luhansk" });
+            cities.Add(new SelectListItem() { Text = "Ternopil", Value = "Ternopil" });
             return cities;
         }
         /// <summary>
@@ -35,10 +34,12 @@ namespace WeatherApp.Services
         public List<SelectListItem> GetPeriods()
         {
             List<SelectListItem> periods = new List<SelectListItem>();
-            periods.Add(new SelectListItem() { Text = "Current weather", Value = "1" });
             periods.Add(new SelectListItem() { Text = "For 3 days", Value = "3" });
-            periods.Add(new SelectListItem() { Text = "For 7 days", Value = "7" });
+            periods.Add(new SelectListItem() { Text = "For 10 days", Value = "10" });
+            periods.Add(new SelectListItem() { Text = "For 14 days", Value = "14" });
             return periods;
         }
+
     }
+
 }

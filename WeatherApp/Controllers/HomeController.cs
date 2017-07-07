@@ -12,12 +12,13 @@ namespace WeatherApp.Controllers
 {
     public class HomeController : Controller
     {
-        private HomeService homeService;
+        private IParametersService paramService;
         private IWeatherService weatherService;
 
-        public HomeController(IWeatherService weatherParam)
+        public HomeController(IWeatherService weatherParam, IParametersService param)
         {            
-            homeService = new HomeService();
+            // Get parameters service from Ninject
+            paramService = param;
             // Get weather service from Ninject
             weatherService = weatherParam;
         }
@@ -69,8 +70,9 @@ namespace WeatherApp.Controllers
         /// </summary>
         private void InitForm()
         {
-            ViewBag.Cities = homeService.GetCities();
-            ViewBag.Periods = homeService.GetPeriods();
+            var paramProvider = new ParametersProvider(paramService);
+            ViewBag.Cities = paramProvider.GetCities();
+            ViewBag.Periods = paramProvider.GetPeriods();
         }
     }
 }
