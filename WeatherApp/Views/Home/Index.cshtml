@@ -1,5 +1,9 @@
 ﻿@model WeatherApp.Models.WeatherRequest
 
+@section scripts{
+    <script src="@Url.Content("~/Scripts/index.js")"></script>
+}
+
 @using (Html.BeginForm("GetWeather", "Home", FormMethod.Post))
 {
 
@@ -12,9 +16,9 @@
             <br />
             <br />
             <h4>Select city: </h4>
-            @Html.DropDownListFor(wr => wr.City, ViewBag.Cities as List<SelectListItem>, new { @class = "form-control" })
+            @Html.DropDownListFor(wr => wr.City, ViewBag.Cities as List<SelectListItem>, new { @class = "form-control", @id = "ddlCity" })
             <br />
-            @Html.TextBoxFor(wr => wr.CustomCity, new { @class = "form-control", @placeholder = "or type another city" })
+            @Html.TextBoxFor(wr => wr.CustomCity, new { @class = "form-control", @id = "tbCustomCity", @placeholder = "or type another city" })
             <br />
             <h4>Select period:</h4>
             @Html.DropDownListFor(wr => wr.Period, ViewBag.Periods as List<SelectListItem>, new { @class = "form-control" })
@@ -26,5 +30,7 @@
         </div>
     </div>    
 }
+
+
 
 
