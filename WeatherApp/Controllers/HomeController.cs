@@ -45,12 +45,8 @@ namespace WeatherApp.Controllers
         {
             try
             {
-                var weatherProvider = new WeatherProvider(weatherService)
-                {
-                    WeatherRequest = weatherRequest
-                };
                 //Get data from open weather
-                var weatherResponse = weatherProvider.GetForecast();
+                var weatherResponse = weatherService.GetWeatherForecast(weatherRequest);
                 return View("ViewWeatherForecast", weatherResponse);
             }
             catch (WebException webEx)
@@ -70,9 +66,8 @@ namespace WeatherApp.Controllers
         /// </summary>
         private void InitForm()
         {
-            var paramProvider = new ParametersProvider(paramService);
-            ViewBag.Cities = paramProvider.GetCities();
-            ViewBag.Periods = paramProvider.GetPeriods();
+            ViewBag.Cities = paramService.GetCities();
+            ViewBag.Periods = paramService.GetPeriods();
         }
     }
 }
