@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    $('#tbCustomCity').val() = "";
+
     // Custom city has been changed
     $('#tbCustomCity').on("change", function () {
 
