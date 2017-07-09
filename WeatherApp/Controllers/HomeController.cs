@@ -51,14 +51,8 @@ namespace WeatherApp.Controllers
             }
             catch (WebException webEx)
             {
-                //show custom error page (configured in Web.config)
+                return RedirectToAction("Index", "Error");
             }
-            catch (Exception ex)
-            {
-                //show custom error page (configured in Web.config)
-
-            }
-            return View("Error");
         }
 
         /// <summary>
