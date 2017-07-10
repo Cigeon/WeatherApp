@@ -13,7 +13,7 @@
     }
 }
 
-<h2>@Model.reqCity (@Model.city.name), wather forecast for @Model.reqPeriod day(s)</h2>
+<h2>@Model.ReqCity (@Model.City.Name), wather forecast for @Model.ReqPeriod day(s)</h2>
 <br />
 <br />
 <table class="table">
@@ -23,7 +23,7 @@
             @foreach (var item in Model.list)
             {
                 <th>
-                    @ConvertToDateTime(item.dt)
+                    @ConvertToDateTime(item.Dt)
                 </th>
             }
         </tr>
@@ -34,7 +34,7 @@
             @foreach (var item in Model.list)
             {
                 <td>
-                    @item.temp.min ... @item.temp.max
+                    @item.Temp.Min ... @item.Temp.Max
                 </td>
             }
         </tr>
@@ -43,7 +43,7 @@
             @foreach (var item in Model.list)
             {
                 <td>
-                    @item.pressure
+                    @item.Pressure
                 </td>
             }
         </tr>
@@ -52,7 +52,7 @@
             @foreach (var item in Model.list)
             {
                 <td>
-                    @item.humidity
+                    @item.Humidity
                 </td>
             }
         </tr>
@@ -61,7 +61,7 @@
             @foreach (var item in Model.list)
             {
                 <td>
-                    @item.speed
+                    @item.Speed
                 </td>
             }
         </tr>
@@ -70,7 +70,7 @@
             @foreach (var item in Model.list)
             {
                 <td>
-                    @item.deg
+                    @item.Deg
                 </td>
             }
         </tr>
@@ -79,7 +79,7 @@
             @foreach (var item in Model.list)
             {
                 <td>
-                    @item.clouds
+                    @item.Clouds
                 </td>
             }
         </tr>        
@@ -88,7 +88,7 @@
             @foreach (var item in Model.list)
             {
                 <td>
-                    @item.weather[0].description
+                    @item.Weather[0].Description
                 </td>
             }
         </tr>  
@@ -97,7 +97,7 @@
             @foreach (var item in Model.list)
             {
                 <td>
-                    <img src="../Content/Images/@(item.weather[0].icon).png" alt="Weather icon" />
+                    <img src="../Content/Images/@(item.Weather[0].Icon).png" alt="Weather icon" />
                 </td>
             }
         </tr>

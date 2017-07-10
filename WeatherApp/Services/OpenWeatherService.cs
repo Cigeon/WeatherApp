@@ -57,8 +57,8 @@ namespace WeatherApp.Services
 
             // Deserialize json
             var data = JsonConvert.DeserializeObject<ResponseWeatherForecast>(json);
-            data.reqCity = city;
-            data.reqPeriod = weatherRequest.Period;
+            data.ReqCity = city;
+            data.ReqPeriod = weatherRequest.Period;
 
             return data;
         }
