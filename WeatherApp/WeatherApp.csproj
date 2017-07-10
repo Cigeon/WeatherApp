@@ -175,8 +175,13 @@
     <Compile Include="Migrations\201707100231251_AddSelectedCities.Designer.cs">
       <DependentUpon>201707100231251_AddSelectedCities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707101220556_AddSelectedPeriods.cs" />
+    <Compile Include="Migrations\201707101220556_AddSelectedPeriods.Designer.cs">
+      <DependentUpon>201707101220556_AddSelectedPeriods.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SelectedCity.cs" />
+    <Compile Include="Models\SelectedPeriod.cs" />
     <Compile Include="Models\WeatherContext.cs" />
     <Compile Include="Models\WeatherRequest.cs" />
     <Compile Include="Models\WeatherResponse.cs" />
@@ -186,6 +191,7 @@
     <Compile Include="Services\IWeatherService.cs" />
     <Compile Include="Services\OpenWeatherService.cs" />
     <Compile Include="Services\IParametersService.cs" />
+    <Compile Include="Services\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -273,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707100231251_AddSelectedCities.resx">
       <DependentUpon>201707100231251_AddSelectedCities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707101220556_AddSelectedPeriods.resx">
+      <DependentUpon>201707101220556_AddSelectedPeriods.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

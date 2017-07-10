@@ -4,19 +4,39 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WeatherApp.Models;
+using WeatherApp.Services;
 
 namespace WeatherApp.App_Start
 {
-    public class DbInitializer : DropCreateDatabaseIfModelChanges<WeatherContext>
+    public class DbInitializer : DropCreateDatabaseAlways<WeatherContext>
     {
         protected override void Seed(WeatherContext context)
         {
-            // Add default cities to dropdown list
-            context.SelectedCities.Add(new SelectedCity { Name = "Kyiv" });
-            context.SelectedCities.Add(new SelectedCity { Name = "Lviv" });
-            context.SelectedCities.Add(new SelectedCity { Name = "Kharkiv" });
-            context.SelectedCities.Add(new SelectedCity { Name = "Dnipro" });
-            context.SelectedCities.Add(new SelectedCity { Name = "Odessa" });
+            // Create repository instance
+            var repo = new Repository();
+
+            // Add default cities to dropdown list "Select city"
+            repo.AddCity(new SelectedCity { Text = "Kyiv", Value = "Kyiv" });
+            repo.AddCity(new SelectedCity { Text = "Lviv", Value = "Lviv" });
+            repo.AddCity(new SelectedCity { Text = "Kharkiv", Value = "Kharkiv" });
+            repo.AddCity(new SelectedCity { Text = "Dnipro", Value = "Dnipro" });
+            repo.AddCity(new SelectedCity { Text = "Odessa", Value = "Odessa" });
+
+            //context.SelectedCities.Add(new SelectedCity { Text = "Kyiv", Value = "Kyiv" });
+            //context.SelectedCities.Add(new SelectedCity { Text = "Lviv", Value = "Lviv" });
+            //context.SelectedCities.Add(new SelectedCity { Text = "Kharkiv", Value = "Kharkiv" });
+            //context.SelectedCities.Add(new SelectedCity { Text = "Dnipro", Value = "Dnipro" });
+            //context.SelectedCities.Add(new SelectedCity { Text = "Odessa", Value = "Odessa" });
+
+            // Add default periods to dropdown list "Select period"
+            repo.AddParameter(new SelectedPeriod { Text = "Current weather", Value = "1" });
+            repo.AddParameter(new SelectedPeriod { Text = "For 3 days", Value = "3" });
+            repo.AddParameter(new SelectedPeriod { Text = "For 7 days", Value = "7" });
+
+            //context.SelectedPeriods.Add(new SelectedPeriod { Text = "Current weather", Value = "1"});
+            //context.SelectedPeriods.Add(new SelectedPeriod { Text = "For 3 days", Value = "3" });
+            //context.SelectedPeriods.Add(new SelectedPeriod { Text = "For 7 days", Value = "7" });
+
             context.SaveChanges();
         }
     }

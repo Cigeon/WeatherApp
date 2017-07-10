@@ -16,6 +16,7 @@ namespace WeatherApp.Models
         }
 
         public DbSet<SelectedCity> SelectedCities { get; set; }
+        public DbSet<SelectedPeriod> SelectedPeriods { get; set; }
         public DbSet<ResponseWeatherForecast> WeatherForecasts { get; set; }
         public DbSet<DailyForecast> DailyForecasts { get; set; }
         public DbSet<Weather> Weathers { get; set; }

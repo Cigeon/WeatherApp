@@ -17,15 +17,14 @@ namespace WeatherApp.Migrations
         protected override void Seed(WeatherContext context)
         {
             //  This method will be called after migrating to the latest version.
-            context.SelectedCities.AddOrUpdate(
-                s => s.Name,
-                new SelectedCity { Name = "Kyiv" },
-                new SelectedCity { Name = "Lviv"},
-                new SelectedCity { Name = "Kharkiv" },
-                new SelectedCity { Name = "Dnipro" },
-                new SelectedCity { Name = "Odessa" }
-            );
-            
+            //context.SelectedCities.AddOrUpdate(
+            //    s => s.Name,
+            //    new SelectedCity { Name = "Kyiv" },
+            //    new SelectedCity { Name = "Lviv"},
+            //    new SelectedCity { Name = "Kharkiv" },
+            //    new SelectedCity { Name = "Dnipro" },
+            //    new SelectedCity { Name = "Odessa" }
+            //);            
         }
     }
 }

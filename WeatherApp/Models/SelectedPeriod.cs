@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WeatherApp.Models
 {
-    public class SelectedCity
+    public class SelectedPeriod
     {
         public int Id { get; set; }
         public string Text { get; set; }
