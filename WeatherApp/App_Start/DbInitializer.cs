@@ -8,7 +8,7 @@ using WeatherApp.Services;
 
 namespace WeatherApp.App_Start
 {
-    public class DbInitializer : DropCreateDatabaseAlways<WeatherContext>
+    public class DbInitializer : DropCreateDatabaseIfModelChanges<WeatherContext>
     {
         protected override void Seed(WeatherContext context)
         {
@@ -22,20 +22,10 @@ namespace WeatherApp.App_Start
             repo.AddCity(new SelectedCity { Text = "Dnipro", Value = "Dnipro" });
             repo.AddCity(new SelectedCity { Text = "Odessa", Value = "Odessa" });
 
-            //context.SelectedCities.Add(new SelectedCity { Text = "Kyiv", Value = "Kyiv" });
-            //context.SelectedCities.Add(new SelectedCity { Text = "Lviv", Value = "Lviv" });
-            //context.SelectedCities.Add(new SelectedCity { Text = "Kharkiv", Value = "Kharkiv" });
-            //context.SelectedCities.Add(new SelectedCity { Text = "Dnipro", Value = "Dnipro" });
-            //context.SelectedCities.Add(new SelectedCity { Text = "Odessa", Value = "Odessa" });
-
             // Add default periods to dropdown list "Select period"
             repo.AddParameter(new SelectedPeriod { Text = "Current weather", Value = "1" });
             repo.AddParameter(new SelectedPeriod { Text = "For 3 days", Value = "3" });
             repo.AddParameter(new SelectedPeriod { Text = "For 7 days", Value = "7" });
-
-            //context.SelectedPeriods.Add(new SelectedPeriod { Text = "Current weather", Value = "1"});
-            //context.SelectedPeriods.Add(new SelectedPeriod { Text = "For 3 days", Value = "3" });
-            //context.SelectedPeriods.Add(new SelectedPeriod { Text = "For 7 days", Value = "7" });
 
             context.SaveChanges();
         }

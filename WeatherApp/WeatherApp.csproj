@@ -161,6 +161,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -178,6 +179,10 @@
     <Compile Include="Migrations\201707101220556_AddSelectedPeriods.cs" />
     <Compile Include="Migrations\201707101220556_AddSelectedPeriods.Designer.cs">
       <DependentUpon>201707101220556_AddSelectedPeriods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707101423338_AddValidationToCities.cs" />
+    <Compile Include="Migrations\201707101423338_AddValidationToCities.Designer.cs">
+      <DependentUpon>201707101423338_AddValidationToCities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SelectedCity.cs" />
@@ -253,10 +258,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ViewWeatherForecast.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\City\Create.cshtml" />
+    <Content Include="Views\City\Delete.cshtml" />
+    <Content Include="Views\City\Details.cshtml" />
+    <Content Include="Views\City\Edit.cshtml" />
+    <Content Include="Views\City\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Dependencies\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -282,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707101220556_AddSelectedPeriods.resx">
       <DependentUpon>201707101220556_AddSelectedPeriods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707101423338_AddValidationToCities.resx">
+      <DependentUpon>201707101423338_AddValidationToCities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

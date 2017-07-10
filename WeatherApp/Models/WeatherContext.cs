@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,7 @@ namespace WeatherApp.Models
 {
     public class WeatherContext : DbContext
     {
-        public WeatherContext() : base("DbConnection")
+        public WeatherContext() : base(ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString)
         {
             // Initialize database
             Database.SetInitializer<WeatherContext>(new DbInitializer());
