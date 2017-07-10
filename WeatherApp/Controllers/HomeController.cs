@@ -47,16 +47,6 @@ namespace WeatherApp.Controllers
             {                
                 //Get data from open weather
                 var weatherResponse = weatherService.GetWeatherForecast(weatherRequest);
-
-                using (var db = new WeatherContext())
-                {
-                    var w = new Weather
-                    {
-                        Description = "Bla-bla"
-                    };
-                    db.Weathers.Add(w);
-                    db.SaveChanges();
-                }
                 return View("ViewWeatherForecast", weatherResponse);
             }
             catch (WebException webEx)

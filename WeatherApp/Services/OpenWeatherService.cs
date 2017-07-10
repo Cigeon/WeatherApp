@@ -36,7 +36,7 @@ namespace WeatherApp.Services
         /// </summary>
         /// <param name="weatherRequest"></param>
         /// <returns></returns>
-        public ResponseWeatherForecast GetWeatherForecast(WeatherRequest weatherRequest)
+        public WeatherForecast GetWeatherForecast(WeatherRequest weatherRequest)
         {
             // Define city for weather forecast
             city = weatherRequest.City;
@@ -56,7 +56,7 @@ namespace WeatherApp.Services
             }         
 
             // Deserialize json
-            var data = JsonConvert.DeserializeObject<ResponseWeatherForecast>(json);
+            var data = JsonConvert.DeserializeObject<WeatherForecast>(json);
             data.ReqCity = city;
             data.ReqPeriod = weatherRequest.Period;
 
