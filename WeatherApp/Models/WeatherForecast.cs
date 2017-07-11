@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace WeatherApp.Models
 {
     public class WeatherForecast
     {
         public int Id { get; set; }
+        public DateTime Dt { get; set; }
         public City City { get; set; }
         public string Cod { get; set; }
         public double Message { get; set; }

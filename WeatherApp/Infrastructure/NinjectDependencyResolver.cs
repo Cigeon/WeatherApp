@@ -15,9 +15,9 @@ namespace WeatherApp.Infrastructure
         public NinjectDependencyResolver(IKernel ninjectKernel)
         {
             kernel = ninjectKernel;
-            kernel.Bind<IWeatherService>().To<OpenWeatherService>();
-            //kernel.Bind<IParametersService>().To<ParametersService>();      // Parameters 
-            kernel.Bind<IParametersService>().To<Repository>();               // Parameters from db
+            kernel.Bind<IWeatherService>().To<OpenWeatherService>();                        
+            kernel.Bind<IParametersService>().To<Repository>();             
+            kernel.Bind<IHistoryService>().To<Repository>();                
 
         }
 

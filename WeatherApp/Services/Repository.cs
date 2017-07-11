@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
-    public class Repository : IParametersService, IDisposable
+    public class Repository : IParametersService, IHistoryService, IDisposable
     {
         private WeatherContext db;
 
@@ -108,6 +107,15 @@ namespace WeatherApp.Services
              }).ToList();
 
              return periods;
+        }
+
+        public void SaveForecast(WeatherForecast forecast)
+        {
+            // Add timestamp to forecast
+            forecast.Dt = DateTime.Now;
+            
+            db.WeatherForecasts.Add(forecast);
+            db.SaveChanges();
         }
 
         /// <summary>

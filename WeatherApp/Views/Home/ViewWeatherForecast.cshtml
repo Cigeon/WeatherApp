@@ -5,7 +5,7 @@
 }
 
 @functions{
-    public string ConvertToDateTime(int dt)
+    public string ConvertUtcToDateTime(int dt)
     {
         var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
         dateTime = dateTime.AddSeconds(dt).ToLocalTime();
@@ -23,7 +23,7 @@
             @foreach (var item in Model.list)
             {
                 <th>
-                    @ConvertToDateTime(item.Dt)
+                    @ConvertUtcToDateTime(item.Dt)
                 </th>
             }
         </tr>
