@@ -15,6 +15,15 @@ namespace WeatherApp.Services
         }
 
         /// <summary>
+        /// Add period for selection
+        /// </summary>
+        /// <param name="period"></param>
+        public void AddParameter(SelectedPeriod period)
+        {
+            
+        }
+
+        /// <summary>
         /// Get the cities list
         /// </summary>
         /// <returns></returns>
@@ -39,6 +48,14 @@ namespace WeatherApp.Services
             periods.Add(new SelectListItem() { Text = "For 3 days", Value = "3" });
             periods.Add(new SelectListItem() { Text = "For 7 days", Value = "7" });
             return periods;
+        }
+
+        /// <summary>
+        /// Dispose 
+        /// </summary>
+        public void Dispose()
+        {
+
         }
     }
 }

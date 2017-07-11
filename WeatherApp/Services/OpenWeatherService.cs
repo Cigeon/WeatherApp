@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Configuration;
 using WeatherApp.Models;
 
@@ -36,7 +32,7 @@ namespace WeatherApp.Services
         /// </summary>
         /// <param name="weatherRequest"></param>
         /// <returns></returns>
-        public ResponseWeatherForecast GetWeatherForecast(WeatherRequest weatherRequest)
+        public WeatherForecast GetWeatherForecast(WeatherRequest weatherRequest)
         {
             // Define city for weather forecast
             city = weatherRequest.City;
@@ -56,9 +52,9 @@ namespace WeatherApp.Services
             }         
 
             // Deserialize json
-            var data = JsonConvert.DeserializeObject<ResponseWeatherForecast>(json);
-            data.reqCity = city;
-            data.reqPeriod = weatherRequest.Period;
+            var data = JsonConvert.DeserializeObject<WeatherForecast>(json);
+            data.ReqCity = city;
+            data.ReqPeriod = weatherRequest.Period;
 
             return data;
         }

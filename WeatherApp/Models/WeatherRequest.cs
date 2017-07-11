@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace WeatherApp.Models
+﻿namespace WeatherApp.Models
 {
     public class WeatherRequest
     {

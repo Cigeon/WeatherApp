@@ -9,6 +9,6 @@ namespace WeatherApp.Services
 {
     public interface IWeatherService
     {
-        ResponseWeatherForecast GetWeatherForecast(WeatherRequest weatherRequest);
+        WeatherForecast GetWeatherForecast(WeatherRequest weatherRequest);
     }
 }

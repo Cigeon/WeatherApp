@@ -4,27 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="list-header clearfix">
-    <span>Error</span>
-</div>
-<div class="list-sfs-holder">
-    <div class="alert alert-error">
-        An unexpected error has occurred. Please contact the system administrator.
-    </div>
-    @if (Model != null && HttpContext.Current.IsDebuggingEnabled)
-    {
-        <div>
-            <p>
-                <b>Exception:</b> @Model.Exception.Message<br />
-                <b>Controller:</b> @Model.ControllerName<br />
-                <b>Action:</b> @Model.ActionName
-            </p>
-            <div style="overflow:scroll">
-                <pre>
-                    @Model.Exception.StackTrace
-                </pre>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-2">
+            <img src="../Content/Images/clouderror.png" alt="red cloud error" />
         </div>
-    }
+        <div class="col-xs-10">
+            <h1>Error!</h1>
+        </div>
+    </div>
 </div>
+<br />
+<br />
+<div class="alert alert-error">
+    <h2>"An error occurred while processing your request."</h2>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 

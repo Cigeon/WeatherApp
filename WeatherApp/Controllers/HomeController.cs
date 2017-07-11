@@ -1,9 +1,5 @@
-﻿using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WeatherApp.Models;
 using WeatherApp.Services;
@@ -14,13 +10,15 @@ namespace WeatherApp.Controllers
     {
         private IParametersService paramService;
         private IWeatherService weatherService;
+        private IHistoryService historyService;
 
-        public HomeController(IWeatherService weatherParam, IParametersService param)
+        public HomeController(IWeatherService weather, IParametersService param, IHistoryService history)
         {            
-            // Get parameters service from Ninject
+            // Get services from Ninject
             paramService = param;
-            // Get weather service from Ninject
-            weatherService = weatherParam;
+            weatherService = weather;
+            historyService = history;
+
         }
 
         /// <summary>
@@ -44,21 +42,18 @@ namespace WeatherApp.Controllers
         public ActionResult GetWeather(WeatherRequest weatherRequest)
         {
             try
-            {
-                //Get data from open weather
-                var weatherResponse = weatherService.GetWeatherForecast(weatherRequest);
-                return View("ViewWeatherForecast", weatherResponse);
+            {                
+                // Get forecast from open weather
+                var forecast = weatherService.GetWeatherForecast(weatherRequest);
+                // Save weather forecast                
+                historyService.SaveForecast(forecast);
+                
+                return View("ViewWeatherForecast", forecast);
             }
             catch (WebException webEx)
             {
-                //show custom error page (configured in Web.config)
+                return RedirectToAction("Index", "Error");
             }
-            catch (Exception ex)
-            {
-                //show custom error page (configured in Web.config)
-
-            }
-            return View("Error");
         }
 
         /// <summary>
