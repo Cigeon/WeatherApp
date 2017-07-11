@@ -16,7 +16,8 @@ namespace WeatherApp.Infrastructure
         {
             kernel = ninjectKernel;
             kernel.Bind<IWeatherService>().To<OpenWeatherService>();                        
-            kernel.Bind<IParametersService>().To<Repository>();             
+            kernel.Bind<IParametersService>().To<Repository>();
+            kernel.Bind<ICityService>().To<Repository>();
             kernel.Bind<IHistoryService>().To<Repository>();                
 
         }

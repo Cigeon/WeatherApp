@@ -7,7 +7,7 @@ using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
-    public class Repository : IParametersService, IHistoryService, IDisposable
+    public class Repository : IParametersService, ICityService, IHistoryService, IDisposable
     {
         private WeatherContext db;
 
@@ -22,7 +22,11 @@ namespace WeatherApp.Services
         /// <param name="city"></param>
         public void AddCity(SelectedCity city)
         {
-             db.SelectedCities.Add(city);
+             // Copy city name to value
+             var c = city;
+             c.Value = city.Text;
+
+             db.SelectedCities.Add(c);
              db.SaveChanges();
         }
 
@@ -32,7 +36,11 @@ namespace WeatherApp.Services
         /// <param name="city"></param>
         public void EditCity(SelectedCity city)
         {
-             db.Entry(city).State = EntityState.Modified;
+             // Copy city name to value
+             var c = city;
+             c.Value = city.Text;
+
+             db.Entry(c).State = EntityState.Modified;
              db.SaveChanges();           
         }
 
@@ -109,12 +117,52 @@ namespace WeatherApp.Services
              return periods;
         }
 
+        /// <summary>
+        /// Get list of forecasts
+        /// </summary>
+        /// <returns></returns>
+        public List<WeatherForecast> GetForecasts()
+        {
+            return db.WeatherForecasts.ToList();
+        }
+
+        /// <summary>
+        /// Get forecast by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public WeatherForecast GetForecastById(int? id)
+        {
+            return db.WeatherForecasts.Include(i => i.City)
+                                      .Include(i => i.List.Select(s => s.Weather))
+                                      .Single(i => i.Id == id);
+        }
+
+        /// <summary>
+        /// Save forecast to database
+        /// </summary>
+        /// <param name="forecast"></param>
         public void SaveForecast(WeatherForecast forecast)
         {
             // Add timestamp to forecast
             forecast.Dt = DateTime.Now;
             
             db.WeatherForecasts.Add(forecast);
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Delete forecast from database
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteForecast(int id)
+        {
+            var forecast = db.WeatherForecasts
+                             .Include(i => i.City)
+                             .Include(i => i.List.Select(s => s.Weather))
+                             .Single(i => i.Id.Equals(id));
+
+            db.WeatherForecasts.Remove(forecast);
             db.SaveChanges();
         }
 

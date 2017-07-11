@@ -12,11 +12,11 @@ namespace WeatherApp.Controllers
         private IWeatherService weatherService;
         private IHistoryService historyService;
 
-        public HomeController(IWeatherService weatherParam, IParametersService param, IHistoryService history)
+        public HomeController(IWeatherService weather, IParametersService param, IHistoryService history)
         {            
             // Get services from Ninject
             paramService = param;
-            weatherService = weatherParam;
+            weatherService = weather;
             historyService = history;
 
         }

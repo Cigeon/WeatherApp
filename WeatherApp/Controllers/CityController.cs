@@ -7,29 +7,31 @@ namespace WeatherApp.Controllers
 {
     public class CityController : Controller
     {
-        //private WeatherContext db = new WeatherContext();
-        private Repository repo = new Repository();
+        private ICityService cityService;
+
+        public CityController(ICityService city)
+        {
+            // Get service from Ninject
+            cityService = city;
+        }
 
         // GET: City
         public ActionResult Index()
         {
-            //return View(db.SelectedCities.ToList());
-            return View(repo.GetCitiesList());
-
+            return View(cityService.GetCitiesList());
         }
 
         // GET: City/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SelectedCity selectedCity = repo.GetCityById(id);
+            
+            SelectedCity selectedCity = cityService.GetCityById(id);
+
             if (selectedCity == null)
-            {
                 return HttpNotFound();
-            }
+            
             return View(selectedCity);
         }
 
@@ -47,12 +49,9 @@ namespace WeatherApp.Controllers
         public ActionResult Create([Bind(Include = "Id,Text,Value")] SelectedCity selectedCity)
         {
             if (ModelState.IsValid)
-            {
-                // Copy city name to value
-                var city = selectedCity;
-                city.Value = city.Text;
+            {                
                 // Save created city to repository
-                repo.AddCity(city);
+                cityService.AddCity(selectedCity);
 
                 return RedirectToAction("Index");
             }
@@ -64,14 +63,13 @@ namespace WeatherApp.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SelectedCity selectedCity = repo.GetCityById(id);
+            
+            SelectedCity selectedCity = cityService.GetCityById(id);
+
             if (selectedCity == null)
-            {
                 return HttpNotFound();
-            }
+            
             return View(selectedCity);
         }
 
@@ -84,11 +82,8 @@ namespace WeatherApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Copy city name to value
-                var city = selectedCity;
-                city.Value = city.Text;
                 // Save modified city to repository
-                repo.EditCity(city);
+                cityService.EditCity(selectedCity);
 
                 return RedirectToAction("Index");
             }
@@ -99,14 +94,12 @@ namespace WeatherApp.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SelectedCity selectedCity = repo.GetCityById(id);
+            
+            SelectedCity selectedCity = cityService.GetCityById(id);
             if (selectedCity == null)
-            {
                 return HttpNotFound();
-            }
+            
             return View(selectedCity);
         }
 
@@ -115,7 +108,7 @@ namespace WeatherApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            repo.DeleteCity(id);
+            cityService.DeleteCity(id);
             return RedirectToAction("Index");
         }
 
@@ -123,7 +116,7 @@ namespace WeatherApp.Controllers
         {
             if (disposing)
             {
-                repo.Dispose();
+                cityService.Dispose();
             }
             base.Dispose(disposing);
         }
