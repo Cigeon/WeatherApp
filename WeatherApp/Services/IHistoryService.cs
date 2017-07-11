@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
-    public interface IHistoryService
+    public interface IHistoryService : IDisposable
     {
         List<WeatherForecast> GetForecasts();
         WeatherForecast GetForecastById(int? id);
         void SaveForecast(WeatherForecast forecast);
         void DeleteForecast(int id);
-        void Dispose();
     }
 }

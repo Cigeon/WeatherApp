@@ -1,9 +1,8 @@
 ﻿using Ninject;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using WeatherApp.Repositories;
 using WeatherApp.Services;
 
 namespace WeatherApp.Infrastructure
@@ -16,9 +15,9 @@ namespace WeatherApp.Infrastructure
         {
             kernel = ninjectKernel;
             kernel.Bind<IWeatherService>().To<OpenWeatherService>();                        
-            kernel.Bind<IParametersService>().To<Repository>();
-            kernel.Bind<ICityService>().To<Repository>();
-            kernel.Bind<IHistoryService>().To<Repository>();                
+            kernel.Bind<IParametersService>().To<ParametersRepository>();
+            kernel.Bind<ICityService>().To<CityRepository>();
+            kernel.Bind<IHistoryService>().To<HistoryRepository>();                
 
         }
 
