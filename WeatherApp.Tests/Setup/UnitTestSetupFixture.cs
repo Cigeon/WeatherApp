@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +26,11 @@ namespace WeatherApp.Tests.Setup
             //InitRepository(kernel); 
             return kernel;
         }
+
+        //protected virtual void InitConfig(StandardKernel kernel)
+        //{
+        //    var fullPath = new FileInfo(Sandbox + "/Web.config").FullName;
+        //    kernel.Bind<IConfig>().ToMethod(c => new TestConfig(fullPath));
+        //}
     }
 }
