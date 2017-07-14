@@ -3,6 +3,10 @@ using WeatherApp.Tests.Tools;
 
 namespace WeatherApp.Tests.Tests
 {
+    // The file Web.config is copied from WeatherApp project to WeatherApp.Test project to folder "Sandbox"
+    // by command - xcopy "$(SolutionDir)WeatherApp\Web.config" "$(ProjectDir)Sandbox\" /y
+    // which configured in build events of WeatherApp.Test project
+
     [TestFixture]
     public class ConfigTests
     {

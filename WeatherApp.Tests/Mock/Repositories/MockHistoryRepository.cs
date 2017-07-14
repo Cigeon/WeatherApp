@@ -33,19 +33,10 @@ namespace WeatherApp.Tests.Mock.Repositories
             return mock.Object.GetForecastById(id);
         }
 
-        public void SaveForecast(WeatherForecast forecast)
-        {
+        public void SaveForecast(WeatherForecast forecast) { }
 
-        }
+        public void DeleteForecast(int id) { }
 
-        public void DeleteForecast(int id)
-        {
-
-        }
-
-        public void Dispose()
-        {
-            
-        }
+        public void Dispose() { }
     }
 }

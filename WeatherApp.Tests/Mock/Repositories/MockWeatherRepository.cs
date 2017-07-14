@@ -14,22 +14,19 @@ namespace WeatherApp.Tests.Mock.Repositories
     {
         private Mock<IWeatherService> mock;
 
-        public bool Error { get; set; }
-
         public MockWeatherRepository()
         {
-            mock = new Mock<IWeatherService>();            
+            mock = new Mock<IWeatherService>();
+            Setup();
         }
+
+        private void Setup()
+        {
+            mock.Setup(foo => foo.GetWeatherForecast(It.IsAny<WeatherRequest>())).Returns(new WeatherForecast());
+        }
+
         public WeatherForecast GetWeatherForecast(WeatherRequest weatherRequest)
         {
-            if (Error)
-            {
-                mock.Setup(foo => foo.GetWeatherForecast(It.IsAny<WeatherRequest>())).Throws(new WebException());
-            }
-            else
-            {
-                mock.Setup(foo => foo.GetWeatherForecast(It.IsAny<WeatherRequest>())).Returns(new WeatherForecast());
-            }
             return mock.Object.GetWeatherForecast(weatherRequest);
         }
     }
