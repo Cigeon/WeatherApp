@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
 using WeatherApp.Models;
 using WeatherApp.Services;
