@@ -70,7 +70,7 @@ namespace WeatherApp.Repositories
         /// Get list of cities
         /// </summary>
         /// <returns></returns>
-        public List<SelectedCity> GetCitiesList()
+        public List<SelectedCity> GetCities()
         {
             return db.SelectedCities.ToList();
         }

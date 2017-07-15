@@ -11,6 +11,7 @@ namespace WeatherApp.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using System.Web.Mvc;
+    using System.Web.Http;
     using Ninject.Web.Mvc;
 
     public static class NinjectWebCommon 

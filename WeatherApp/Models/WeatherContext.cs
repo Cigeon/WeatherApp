@@ -17,5 +17,7 @@ namespace WeatherApp.Models
         public DbSet<WeatherForecast> WeatherForecasts { get; set; }
         public DbSet<DailyForecast> DailyForecasts { get; set; }
         public DbSet<Weather> Weathers { get; set; }
+
+        public System.Data.Entity.DbSet<WeatherApp.Models.City> Cities { get; set; }
     }
 }
