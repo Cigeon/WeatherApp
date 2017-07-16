@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using WeatherApp.Controllers;
 using WeatherApp.Models;
+using WeatherApp.Repositories;
 
 namespace WeatherApp.Tests.Tests
 {
@@ -14,7 +15,8 @@ namespace WeatherApp.Tests.Tests
         public void Index_Model_Is_Instance_Of_Collection_Of_SelectedCity()
         {
             // Arrange
-            var controller = DependencyResolver.Current.GetService<CityController>();
+            var controller = DependencyResolver.Current.GetService<CityController>();           
+
             // Act
             var result = controller.Index() as ViewResult;
             // Assert
