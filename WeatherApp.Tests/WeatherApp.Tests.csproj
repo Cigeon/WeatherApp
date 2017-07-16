@@ -113,6 +113,7 @@
     <Compile Include="Tests\HomeControllerTests.cs" />
     <Compile Include="Tests\UnitTestSetupFixture.cs" />
     <Compile Include="Tests\WebApiCitiesControllerTests.cs" />
+    <Compile Include="Tests\WebApiHistoryControllerTests.cs" />
     <Compile Include="Tools\NinjectDependencyResolver.cs" />
     <Compile Include="Tools\TestConfig.cs" />
   </ItemGroup>

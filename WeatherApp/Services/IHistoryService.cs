@@ -9,6 +9,7 @@ namespace WeatherApp.Services
         List<WeatherForecast> GetForecasts();
         WeatherForecast GetForecastById(int? id);
         void SaveForecast(WeatherForecast forecast);
+        void EditForecast(WeatherForecast forecast);
         void DeleteForecast(int id);
     }
 }

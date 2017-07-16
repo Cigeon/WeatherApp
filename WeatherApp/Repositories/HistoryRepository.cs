@@ -22,7 +22,9 @@ namespace WeatherApp.Repositories
         /// <returns></returns>
         public List<WeatherForecast> GetForecasts()
         {
-            return db.WeatherForecasts.ToList();
+            return db.WeatherForecasts.Include(ei => ei.City)
+                                      .Include(i => i.List.Select(s => s.Weather))
+                                      .ToList();
         }
 
         /// <summary>
@@ -47,6 +49,16 @@ namespace WeatherApp.Repositories
             forecast.Dt = DateTime.Now;
 
             db.WeatherForecasts.Add(forecast);
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Edit forecast and save it to database
+        /// </summary>
+        /// <param name="forecast"></param>
+        public void EditForecast(WeatherForecast forecast)
+        {
+            db.Entry(forecast).State = EntityState.Modified;
             db.SaveChanges();
         }
 
