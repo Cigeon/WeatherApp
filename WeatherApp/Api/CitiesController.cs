@@ -82,7 +82,19 @@ namespace WeatherApp.Api
                 return BadRequest(ModelState);
             }
 
-            cityRepo.AddCity(city);
+            if (city == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                cityRepo.AddCity(city);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return InternalServerError();
+            }            
 
             return CreatedAtRoute("DefaultApi", new { id = city.Id }, city);
         }
@@ -97,7 +109,21 @@ namespace WeatherApp.Api
                 return NotFound();
             }
 
-            cityRepo.DeleteCity(city.Id);
+            try
+            {
+                cityRepo.DeleteCity(city.Id);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CityExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return InternalServerError();
+                }
+            }            
 
             return Ok(city);
         }
