@@ -1,6 +1,7 @@
 ﻿using Ninject;
 using NUnit.Framework;
 using System.Web.Mvc;
+using WeatherApp.Repositories;
 using WeatherApp.Services;
 using WeatherApp.Tests.Mock.Repositories;
 
@@ -33,7 +34,7 @@ namespace WeatherApp.Tests.Tests
             var kernel = njectKernel;
             kernel.Bind<IParametersService>().To<MockParametersRepository>();
             kernel.Bind<IWeatherService>().To<MockWeatherRepository>();
-            kernel.Bind<ICityService>().To<MockCityRepository>();
+            kernel.Bind<ICityService>().To<CityRepository>();
             kernel.Bind<IHistoryService>().To<MockHistoryRepository>();            
         }
     }
