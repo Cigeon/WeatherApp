@@ -18,6 +18,7 @@ namespace WeatherApp.Tests.Tests
         [OneTimeSetUp]
         public void Setup()
         {
+
             InitKernel();
         }
 
@@ -35,7 +36,7 @@ namespace WeatherApp.Tests.Tests
             kernel.Bind<IParametersService>().To<MockParametersRepository>();
             kernel.Bind<IWeatherService>().To<MockWeatherRepository>();
             kernel.Bind<ICityService>().To<CityRepository>();
-            kernel.Bind<IHistoryService>().To<MockHistoryRepository>();            
+            kernel.Bind<IHistoryService>().To<HistoryRepository>();            
         }
     }
 

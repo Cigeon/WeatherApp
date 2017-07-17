@@ -17,14 +17,14 @@ namespace WeatherApp.Tests.Mock.Repositories
 
         private void Setup()
         {
-            mock.Setup(foo => foo.GetCitiesList()).Returns(new List<SelectedCity>());
+            mock.Setup(foo => foo.GetCities()).Returns(new List<SelectedCity>());
             mock.Setup(foo => foo.GetCityById(0)).Returns((SelectedCity)null);
             mock.Setup(foo => foo.GetCityById(1)).Returns(new SelectedCity());
         }
 
-        public List<SelectedCity> GetCitiesList()
+        public List<SelectedCity> GetCities()
         {
-            return mock.Object.GetCitiesList();
+            return mock.Object.GetCities();
         }
 
         public SelectedCity GetCityById(int? id)

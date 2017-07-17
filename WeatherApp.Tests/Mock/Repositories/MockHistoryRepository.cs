@@ -35,6 +35,8 @@ namespace WeatherApp.Tests.Mock.Repositories
 
         public void SaveForecast(WeatherForecast forecast) { }
 
+        public void EditForecast(WeatherForecast forecast) { }
+
         public void DeleteForecast(int id) { }
 
         public void Dispose() { }

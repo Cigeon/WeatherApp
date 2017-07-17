@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using WeatherApp.Models;
@@ -63,16 +64,30 @@ namespace WeatherApp.Repositories
         public SelectedCity GetCityById(int? id)
         {
             if (id == null) return null;
-            return db.SelectedCities.Find(id);
+            try
+            {
+                return db.SelectedCities.Find(id);
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }            
         }
 
         /// <summary>
         /// Get list of cities
         /// </summary>
         /// <returns></returns>
-        public List<SelectedCity> GetCitiesList()
+        public List<SelectedCity> GetCities()
         {
-            return db.SelectedCities.ToList();
+            try
+            {
+                return db.SelectedCities.ToList();
+            }
+            catch (InvalidOperationException)
+            {
+                return new List<SelectedCity>();
+            }            
         }
 
         /// <summary>

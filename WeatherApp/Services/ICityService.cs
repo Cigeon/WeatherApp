@@ -6,7 +6,7 @@ namespace WeatherApp.Services
 {
     public interface ICityService : IDisposable
     {
-        List<SelectedCity> GetCitiesList();
+        List<SelectedCity> GetCities();
         SelectedCity GetCityById(int? id);
         void AddCity(SelectedCity city);
         void EditCity(SelectedCity city);

@@ -18,7 +18,7 @@ namespace WeatherApp.Controllers
         // GET: City
         public ActionResult Index()
         {
-            return View(cityService.GetCitiesList());
+            return View(cityService.GetCities());
         }
 
         // GET: City/Details/5

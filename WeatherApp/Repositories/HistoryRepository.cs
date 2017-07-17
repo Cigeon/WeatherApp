@@ -22,7 +22,17 @@ namespace WeatherApp.Repositories
         /// <returns></returns>
         public List<WeatherForecast> GetForecasts()
         {
-            return db.WeatherForecasts.ToList();
+            try
+            {
+                return db.WeatherForecasts.Include(ei => ei.City)
+                                      .Include(i => i.List.Select(s => s.Weather))
+                                      .ToList();
+            }
+            catch (InvalidOperationException)
+            {
+                return new List<WeatherForecast>();
+            }
+            
         }
 
         /// <summary>
@@ -32,9 +42,17 @@ namespace WeatherApp.Repositories
         /// <returns></returns>
         public WeatherForecast GetForecastById(int? id)
         {
-            return db.WeatherForecasts.Include(ei => ei.City)
+            try
+            {
+                return db.WeatherForecasts.Include(ei => ei.City)
                                       .Include(i => i.List.Select(s => s.Weather))
                                       .Single(i => i.Id == id);
+
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -51,17 +69,34 @@ namespace WeatherApp.Repositories
         }
 
         /// <summary>
+        /// Edit forecast and save it to database
+        /// </summary>
+        /// <param name="forecast"></param>
+        public void EditForecast(WeatherForecast forecast)
+        {
+            db.Entry(forecast).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        /// <summary>
         /// Delete forecast from database
         /// </summary>
         /// <param name="id"></param>
         public void DeleteForecast(int id)
         {
             var forecast = db.WeatherForecasts
-                             .Include(i => i.City)
-                             .Include(i => i.List.Select(s => s.Weather))
-                             .Single(i => i.Id.Equals(id));
+                                .Include(ei => ei.City)
+                                .Include(i => i.List.Select(s => s.Weather))
+                                .Single(i => i.Id == id);
 
-            db.WeatherForecasts.Remove(forecast);
+            db.Cities.Remove(forecast.City);
+            foreach (var item in forecast.List)
+            {
+                db.Weathers.RemoveRange(item.Weather);
+            }
+            db.DailyForecasts.RemoveRange(forecast.List);
+            db.WeatherForecasts.Remove(forecast);            
+            
             db.SaveChanges();
         }
 

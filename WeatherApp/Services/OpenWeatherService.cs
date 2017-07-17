@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Web.Configuration;
 using WeatherApp.Models;
@@ -42,17 +43,27 @@ namespace WeatherApp.Services
                 city = weatherRequest.CustomCity;
 
             // Uri parameters 
+            token = WebConfigurationManager.AppSettings["OpenWeatherToken"];
+            uri = WebConfigurationManager.AppSettings["OpenWeatherUri"];
             uri += $"forecast/daily?q={city},uk&units=metric&cnt={weatherRequest.Period}&appid={token}";
 
             // Get data from open weather
             var json = "";
-            using (var client = new WebClient())
+            try
             {
-                json = client.DownloadString(uri);
-            }         
+                using (var client = new WebClient())
+                {
+                    json = client.DownloadString(uri);
+                }
+            }
+            catch (WebException)
+            {
+                return null;
+            }                    
 
             // Deserialize json
             var data = JsonConvert.DeserializeObject<WeatherForecast>(json);
+            data.Dt = DateTime.Now;
             data.ReqCity = city;
             data.ReqPeriod = weatherRequest.Period;
 
