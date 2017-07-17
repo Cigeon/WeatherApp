@@ -34,7 +34,7 @@ namespace WeatherApp.Tests.Tests
         {
             var kernel = njectKernel;
             kernel.Bind<IParametersService>().To<MockParametersRepository>();
-            kernel.Bind<IWeatherService>().To<MockWeatherRepository>();
+            kernel.Bind<IWeatherService>().To<OpenWeatherService>();
             kernel.Bind<ICityService>().To<CityRepository>();
             kernel.Bind<IHistoryService>().To<HistoryRepository>();            
         }

@@ -173,6 +173,7 @@
   <ItemGroup>
     <Compile Include="Api\CitiesController.cs" />
     <Compile Include="Api\HistoryController.cs" />
+    <Compile Include="Api\WeatherController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DbInitializer.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -216,6 +217,10 @@
     <Compile Include="Migrations\201707111019572_AddAnotationsToWeatherForecast.cs" />
     <Compile Include="Migrations\201707111019572_AddAnotationsToWeatherForecast.Designer.cs">
       <DependentUpon>201707111019572_AddAnotationsToWeatherForecast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707171237169_WeatherModelAddScriptIgnoreForDailyId.cs" />
+    <Compile Include="Migrations\201707171237169_WeatherModelAddScriptIgnoreForDailyId.Designer.cs">
+      <DependentUpon>201707171237169_WeatherModelAddScriptIgnoreForDailyId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\City.cs" />
@@ -347,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707111019572_AddAnotationsToWeatherForecast.resx">
       <DependentUpon>201707111019572_AddAnotationsToWeatherForecast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707171237169_WeatherModelAddScriptIgnoreForDailyId.resx">
+      <DependentUpon>201707171237169_WeatherModelAddScriptIgnoreForDailyId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

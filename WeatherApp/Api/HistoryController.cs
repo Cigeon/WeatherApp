@@ -15,7 +15,6 @@ namespace WeatherApp.Api
 {
     public class HistoryController : ApiController
     {
-        private WeatherContext db = new WeatherContext();
         private IHistoryService historyRepo;
 
         public HistoryController(IHistoryService history)
@@ -127,7 +126,7 @@ namespace WeatherApp.Api
                 }
             }
 
-            return Ok(f);
+            return Ok(weatherForecast);
         }
 
         protected override void Dispose(bool disposing)

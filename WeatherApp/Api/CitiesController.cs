@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -22,8 +23,6 @@ namespace WeatherApp.Api
         // GET: api/Cities
         public List<SelectedCity> GetCities()
         {
-            //return db.Cities;
-
             return cityRepo.GetCities();
         }
 
@@ -58,7 +57,7 @@ namespace WeatherApp.Api
             {
                 cityRepo.EditCity(city);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!CityExists(id))
                 {
@@ -91,7 +90,7 @@ namespace WeatherApp.Api
             {
                 cityRepo.AddCity(city);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 return InternalServerError();
             }            
@@ -113,7 +112,7 @@ namespace WeatherApp.Api
             {
                 cityRepo.DeleteCity(city.Id);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!CityExists(id))
                 {
