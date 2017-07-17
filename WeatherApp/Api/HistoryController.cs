@@ -60,7 +60,7 @@ namespace WeatherApp.Api
             {
                 historyRepo.EditForecast(forecast);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!ForecastExists(id))
                 {
@@ -91,9 +91,9 @@ namespace WeatherApp.Api
 
             try
             {
-                historyRepo.EditForecast(forecast);
+                historyRepo.SaveForecast(forecast);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 return InternalServerError();
             }
@@ -115,7 +115,7 @@ namespace WeatherApp.Api
             {
                 historyRepo.DeleteForecast(id);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!ForecastExists(id))
                 {
@@ -127,7 +127,7 @@ namespace WeatherApp.Api
                 }
             }
 
-            return Ok(weatherForecast);
+            return Ok(f);
         }
 
         protected override void Dispose(bool disposing)

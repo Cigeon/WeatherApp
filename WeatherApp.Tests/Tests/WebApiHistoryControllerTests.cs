@@ -1,6 +1,8 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using WeatherApp.Api;
@@ -20,7 +22,6 @@ namespace WeatherApp.Tests.Tests
             var result = controller.GetForecasts();
             // Assert
             Assert.IsInstanceOf<List<WeatherForecast>>(result);
-            Assert.IsTrue(result.Count > 0);
         }
 
         [Test]
@@ -69,10 +70,7 @@ namespace WeatherApp.Tests.Tests
         {
             // Arrange
             var controller = DependencyResolver.Current.GetService<HistoryController>();
-            var forecast = new WeatherForecast
-            {
-                Id = 1
-            };
+            var forecast = GetDummyForecast();
             // Act           
             var result = controller.PutForecast(forecast.Id++, forecast) as BadRequestResult;
             // Assert
@@ -84,10 +82,8 @@ namespace WeatherApp.Tests.Tests
         {
             // Arrange
             var controller = DependencyResolver.Current.GetService<HistoryController>();
-            var forecast = new WeatherForecast
-            {
-                Id = 100       // doesn't exist
-            };
+            var forecast = GetDummyForecast();
+            forecast.Id = -1;
             // Act           
             var result = controller.PutForecast(forecast.Id, forecast) as NotFoundResult;
             // Assert
@@ -99,14 +95,11 @@ namespace WeatherApp.Tests.Tests
         {
             // Arrange
             var controller = DependencyResolver.Current.GetService<HistoryController>();
-            var forecast = new WeatherForecast
-            {
-                Id = 10
-            };
+            var forecast = GetDummyForecast();
             // Act           
-            var result = controller.PostForecast(forecast) as CreatedAtRouteNegotiatedContentResult<SelectedCity>;
+            var result = controller.PostForecast(forecast) as CreatedAtRouteNegotiatedContentResult<WeatherForecast>;
             // Assert
-            Assert.IsInstanceOf<CreatedAtRouteNegotiatedContentResult<SelectedCity>>(result);
+            Assert.IsInstanceOf<CreatedAtRouteNegotiatedContentResult<WeatherForecast>>(result);
             Assert.IsTrue(result.Content.Id == forecast.Id);
         }
 
@@ -126,7 +119,7 @@ namespace WeatherApp.Tests.Tests
         public void DeleteForecast_When_Right_Id_Return_Deleted_Forecast()
         {
             // Arrange
-            var id = 5;
+            var id = 1;
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             // Act
             var result = controller.DeleteForecast(id) as OkNegotiatedContentResult<WeatherForecast>;
@@ -145,6 +138,18 @@ namespace WeatherApp.Tests.Tests
             var result = controller.DeleteForecast(id) as NotFoundResult;
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);
+        }
+
+
+        private WeatherForecast GetDummyForecast()
+        {
+            var json = "{\"Id\": 1,\"Dt\": '2017-07-17T00:18:34.597',\"City\": {\"Id\": 11,\"Name\": 'Pushcha-Voditsa'," + 
+                "\"Coord\": {\"Lon\": 30.5,\"Lat\": 50.45},\"Country\": 'UA',\"Population\": 0},\"Cod\": '200',\"Message\": 0.4889564," +
+                "\"Cnt\": 1,\"List\": [{\"Id\": 25,\"Dt\": 1500199200,\"Temp\": {\"Day\": 13.64,\"Min\": 9.79,\"Max\": 13.64," + 
+                "\"Night\": 9.79,\"Eve\": 13.64,\"Morn\": 13.64},\"Pressure\": 1018.04,\"Humidity\": 65,\"Weather\": [{" +
+                "\"WeatherId\": 25,\"Id\": 0,\"Main\": \"Clear\",\"Description\": 'sky is clear',\"Icon\": '01d',\"DailyForecastId\": 25}]," +
+                "\"Speed\": 2.52,\"Deg\": 325,\"Clouds\": 0,\"WeatherForecastId\": 11}],\"ReqCity\": \"Kyiv\",\"ReqPeriod\": '1'}";
+            return JsonConvert.DeserializeObject<WeatherForecast>(json);
         }
     }
 }
