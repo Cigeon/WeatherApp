@@ -104,8 +104,9 @@ namespace WeatherApp.Api
         [ResponseType(typeof(WeatherForecast))]
         public IHttpActionResult DeleteForecast(int id)
         {
-            var weatherForecast = historyRepo.GetForecastById(id);
-            if (weatherForecast == null)
+            var forecast = historyRepo.GetForecastById(id);            
+
+            if (forecast == null)
             {
                 return NotFound();
             }
@@ -126,7 +127,7 @@ namespace WeatherApp.Api
                 }
             }
 
-            return Ok(weatherForecast);
+            return Ok(forecast);
         }
 
         protected override void Dispose(bool disposing)
