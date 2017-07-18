@@ -266,6 +266,8 @@
     <Content Include="Content\Images\50d.png" />
     <Content Include="Content\Images\50n.png" />
     <Content Include="Content\Images\clouderror.png" />
+    <Content Include="Content\Images\family.png" />
+    <Content Include="Content\Images\umbrella_logo.png" />
     <Content Include="Content\Images\weather_icon_128x128.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

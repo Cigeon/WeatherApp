@@ -4,56 +4,65 @@
     <script src="@Url.Content("~/Scripts/index.js")"></script>
 }
 
-@using (Html.BeginForm("GetWeather", "Home", FormMethod.Post))
-{
-
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-
-            
-            <div class="container">
+<!-- content -->
+<div class="wrapper row2">
+    <div id="container" class="clear">
+        <section id="slider">
+            <a href="#">
+                <img src="~/Content/Images/family.png" alt="Happy family" />
+            </a>
+        </section>
+        <!-- content body -->
+        <section id="shout">            
+            @using (Html.BeginForm("GetWeather", "Home", FormMethod.Post))
+            {
                 <div class="row">
-                    <div class="col-xs-10 text-center">
-                        <h2 class="text-primary">Weather Forecast</h2>
+                    <div class="col-md-4 col-md-offset-4">
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-10 text-center">
+                                    <h2 class="text-primary">Weather Forecast</h2>
+                                    <br />
+                                    <img src="../Content/Images/weather_icon_128x128.png" alt="Sun and cloud" />
+                                    <br />
+                                    <br />
+                                    <h4>Select city: </h4>
+                                </div>
+                            </div>
+                            <div class="col-xs-2"></div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-10 text-center">
+                                    @Html.DropDownListFor(wr => wr.City, ViewBag.Cities as List<SelectListItem>, new { @class = "form-control", @id = "ddlCity" })
+                                    <br />
+                                    @Html.TextBoxFor(wr => wr.CustomCity, new { @class = "form-control", @id = "tbCustomCity", @placeholder = "or type another city" })
+                                    <br />
+                                    <h4>Select period:</h4>
+                                    @Html.DropDownListFor(wr => wr.Period, ViewBag.Periods as List<SelectListItem>, new { @class = "form-control" })
+                                    <br />
+                                    <br />
+                                    <input type='submit' value='Show weather' class="btn btn-primary btn-block" />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "History")'">Previous requests</button>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "City")'">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+
                         <br />
-                        <img src="../Content/Images/weather_icon_128x128.png" alt="Sun and cloud" />
                         <br />
-                        <br />
-                        <h4>Select city: </h4>
                     </div>
                 </div>
-                <div class="col-xs-2"></div>
-            </div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-10 text-center"> 
-                        @Html.DropDownListFor(wr => wr.City, ViewBag.Cities as List<SelectListItem>, new { @class = "form-control", @id = "ddlCity" })
-                        <br />
-                        @Html.TextBoxFor(wr => wr.CustomCity, new { @class = "form-control", @id = "tbCustomCity", @placeholder = "or type another city" })
-                        <br />
-                        <h4>Select period:</h4>
-                        @Html.DropDownListFor(wr => wr.Period, ViewBag.Periods as List<SelectListItem>, new { @class = "form-control" })
-                        <br />
-                        <br />                        
-                        <input type='submit' value='Show weather' class="btn btn-primary btn-block" />
-                        <br />
-                        <br />
-                        <br />
-                        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "History")'">Previous requests</button>
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "City")'">Edit</button>
-                    </div>
-                </div>
-            </div>            
-            
-            <br />
-            <br />             
-        </div>
-    </div>    
-}
-
-
-
-
+            }
+        </section>
+        <!-- / content body -->
+    </div>
+</div>

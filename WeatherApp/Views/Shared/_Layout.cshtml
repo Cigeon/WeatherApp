@@ -8,8 +8,29 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    
-    <div class="container body-content">
+    <!-- header -->
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+            <a href='@Url.Action("Index", "Home")'>
+                <div id="hgroup">
+                    <img src="~/Content/Images/umbrella_logo.png" />
+                </div>
+                <div id="hgroup">
+                    <h1>Fast Forecast</h1>
+                    <h2>Simple & Precise & Fast</h2>
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href='@Url.Action("Index", "Home")'>Home</a></li>
+                    <li><a href='@Url.Action("Index", "City")'>Manage cities</a></li>
+                    <li class="last"><a href='@Url.Action("Index", "History")'>Previous requests</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- / header -->
+    <div class="container body-content">        
         @RenderBody()
         <hr />
         <footer>
