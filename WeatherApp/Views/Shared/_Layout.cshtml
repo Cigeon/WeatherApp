@@ -28,14 +28,25 @@
                 </ul>
             </nav>
         </header>
-    </div>
-    <!-- / header -->
-    <div class="container body-content">        
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Weather Application</p>
-        </footer>
+
+        <!-- / header -->
+        <div class="container body-content">
+            @RenderBody()
+
+            <!-- footer -->
+            <footer id="footer">
+                <div class="footer_inner_left">
+                    <p>&copy;Fast Forecast @DateTime.Now.Year</p>
+                    <p>Simple, precise and fast weather service,</p>
+                    <p>which gives you weather forecast for any place</p>
+                </div>
+                <div class="footer_inner_right">
+                    <p>330 Franklin Road, Suite 135A, Brentwood, TN 37027-5237</p>
+                    <p>Phone: 615.555.5555, Fax: 615.555.5556</p>
+                    <p>info@fastforecast.com</p>
+                </div>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
