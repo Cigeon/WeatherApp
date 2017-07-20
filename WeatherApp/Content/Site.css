@@ -1,41 +1,13 @@
-﻿/*body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}*/
-
-/* Set padding to keep content from hitting the edges */
-/*.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}*/
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-/*.dl-horizontal dt {
-    white-space: normal;
-}*/
-
-/* Set width on the form input elements since they're 100% wide by default */
-/*input,
-select,
-textarea {
-    max-width: 280px;
-}*/
-
-
-
-
+﻿
 html {
     overflow-y: scroll;
 }
-/* Forces a scrollbar when the viewport is larger than the websites content - CSS3 */
 
 body {
     margin: 0;
     padding: 0;
     font-size: 13px;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    /*font-family: Georgia, "Times New Roman", Times, serif;*/
     color: #777777;
     background-color: #FFFFFF;
 }
@@ -67,20 +39,6 @@ a {
     text-decoration: none;
 }
 
-code {
-    font-weight: normal;
-    font-style: normal;
-    font-family: Georgia, "Times New Roman", Times, serif;
-}
-
-.fl_left {
-    float: left;
-}
-
-.fl_right {
-    float: right;
-}
-
 img {
     margin: 0;
     padding: 0;
@@ -88,52 +46,6 @@ img {
     line-height: normal;
     vertical-align: middle;
 }
-
-.imgholder, .imgl, .imgr {
-    padding: 4px;
-    border: 1px solid #D6D6D6;
-    text-align: center;
-}
-
-.imgl {
-    float: left;
-    margin: 0 15px 15px 0;
-    clear: left;
-}
-
-.imgr {
-    float: right;
-    margin: 0 0 15px 15px;
-    clear: right;
-}
-
-/*----------------------------------------------HTML 5 Overrides-------------------------------------*/
-
-/*address, article, aside, figcaption, figure, footer, header, nav, section {
-    display: block;
-    margin: 0;
-    padding: 0;
-}
-
-q {
-    display: block;
-    padding: 0 10px 8px 10px;
-    color: #777777;
-    background-color: #ECECEC;
-    font-style: italic;
-    line-height: normal;
-}
-
-    q:before {
-        content: '“ ';
-        font-size: 26px;
-    }
-
-    q:after {
-        content: ' „';
-        font-size: 26px;
-        line-height: 0;
-    }*/
 
 /* ----------------------------------------------Wrapper-------------------------------------*/
 
@@ -150,24 +62,15 @@ div.wrapper {
     background-color: #FFFFFF;
 }
 
-/*.row2 {
+.row2 {
     color: #777777;
     background-color: #FFFFFF;
-}
-
-.row2 a {
-    color: #FF9900;
-    background-color: #FFFFFF;
+    padding: 50px 0 160px 0;
 }
 
 .row3 {
     border-top: 1px solid #DEDEDE;
 }
-
-.row3, .row3 a {
-    color: #777777;
-    background-color: #FFFFFF;
-}*/
 
 /*----------------------------------------------Generalise-------------------------------------*/
 
@@ -182,69 +85,10 @@ nav ul {
     list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    font-weight: bold;
-    font-style: normal;
-    line-height: normal;
-    text-transform: uppercase;
-}
-
-address {
-    font-style: normal;
-}
-
-blockquote, q {
-    display: block;
-    padding: 8px 10px;
-    color: #777777;
-    background-color: #ECECEC;
-    font-style: italic;
-    line-height: normal;
-}
-
-    blockquote:before, q:before {
-        content: '“ ';
-        font-size: 26px;
-    }
-
-    blockquote:after, q:after {
-        content: ' „';
-        font-size: 26px;
-        line-height: 0;
-    }
-
-.one_third, .two_third, .three_third {
-    display: block;
-    float: left;
-    margin: 0 30px 0 0;
-}
-
-.one_third {
-    width: 300px;
-}
-
-.two_third {
-    width: 630px;
-}
-
-.three_third {
-    width: 960px;
-    float: none;
-    margin-right: 0;
-    clear: both;
-}
-
-.lastbox {
-    margin-right: 0;
-}
-
 /*----------------------------------------------Header-------------------------------------*/
 
 #header {
-    padding: 15px 0 5px 0;
+    padding: 15px 0 25px 0;
 }
 
 #header #hgroup {
@@ -257,8 +101,10 @@ blockquote, q {
 }
 
 #header #hgroup h1, #header #hgroup h2 {
-    font-weight: normal;
-    text-transform: none;
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+        text-transform: none;
 }
 
 #header #hgroup h1 {
@@ -300,85 +146,28 @@ blockquote, q {
 
 /*----------------------------------------------Content Area-------------------------------------*/
 
-#container {
-    padding: 30px 0;
+.container {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
 }
 
-    #container section {
-        display: block;
-        width: 100%;
-        margin: 0 0 30px 0;
-        padding: 0;
-    }
+.item {
+    margin: 10px 0;
+}
 
-    #container .last {
-        margin: 0;
-    }
+.content {
+    padding: 50px 0 160px 0;
+}
 
-    #container .more {
-        text-align: right;
-    }
+.form_middle {
+    width: 50%;
+    padding: 20px 0;
+}
 
-    /* ------Shout-----*/
-
-    #container #shout {
-        padding: 30px 0;
-        border-top: 1px solid #DEDEDE;
-        border-bottom: 1px solid #DEDEDE;
-        text-align: center;
-    }
-
-        #container #shout h1 {
-            font-size: 36px;
-            font-weight: normal;
-            font-style: italic;
-            text-transform: uppercase;
-        }
-
-        #container #shout p {
-            font-size: 16px;
-            margin-bottom: 0;
-            padding-bottom: 0;
-            line-height: 1.8em;
-        }
-
-    /* ------Main Content-----*/
-
-    #container #content {
-        float: left;
-        width: 630px;
-        line-height: 1.6em;
-    }
-
-        #container #content #services {
-        }
-
-            #container #content #services article {
-            }
-
-                #container #content #services article h2 {
-                    font-size: 14px;
-                    margin-bottom: 15px;
-                }
-
-                #container #content #services article p {
-                    margin: 0;
-                    padding: 0;
-                }
-
-                #container #content #services article img {
-                    float: left;
-                    width: 80px;
-                    height: 80px;
-                    margin: 0 10px 10px 0;
-                    padding: 4px;
-                    border: 1px solid #DEDEDE;
-                }
-
-                #container #content #services article footer {
-                    margin: 10px 0 0 0;
-                }
-
+.dl-horizontal dt {
+    padding: 5px 0;
+}
 
 /*----------------------------------------------Footer-------------------------------------*/
 
@@ -397,7 +186,6 @@ blockquote, q {
 
 #footer {
     padding: 40px 0;
-    border-top: 1px solid #D6D6D6;
     overflow: auto;
 }
 

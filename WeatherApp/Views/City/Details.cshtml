@@ -5,23 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="content">
+    <h2>City details</h2>
 
-<div>
-    <h4>City</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Text)
-        </dt>
+    <div>
+        <dl class="dl-horizontal form_middle">
+            <dt>
+                @Html.DisplayNameFor(model => model.Text)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Text)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Text)
+            </dd>
 
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
