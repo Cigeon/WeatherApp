@@ -51,6 +51,7 @@ img {
 div.wrapper {
     display: block;
     width: 960px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0;
     text-align: left;
@@ -76,6 +77,7 @@ div.wrapper {
 #header, #container, #footer {
     display: block;
     width: 960px;
+    max-width: 100%
 }
 
 nav ul {
@@ -87,7 +89,7 @@ nav ul {
 /*----------------------------------------------Header-------------------------------------*/
 
 #header {
-    padding: 15px 0 25px 0;
+    padding: 15px 10px 25px 10px;
 }
 
 #header #hgroup {
@@ -145,7 +147,7 @@ nav ul {
 
 /*----------------------------------------------Content Area-------------------------------------*/
 
-#slider {
+#slider {    
     position: relative;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
     padding: 10px;
@@ -153,22 +155,24 @@ nav ul {
 }
 
 #slider img {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
 }
 
 #slider::after {
     content: '';
     position: absolute;
-    z-index: -1; /* hide shadow behind image */
+    z-index: -1; 
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
     width: 70%;
-    left: 15%; /* one half of the remaining 30% */
+    left: 15%; 
     height: 100px;
     bottom: 0;
 }
 
 .container {
-    width: 30%;
+    width: 40%;
     display: flex;
     flex-direction: column;
 }
@@ -178,7 +182,7 @@ nav ul {
 }
 
 .content {
-    padding: 50px 0 160px 0;
+    padding: 50px 10px 160px 10px;
 }
 
 .form_middle {
@@ -206,7 +210,7 @@ nav ul {
 }
 
 #footer {
-    padding: 40px 0;
+    padding: 40px 10px;
     overflow: auto;
 }
 
