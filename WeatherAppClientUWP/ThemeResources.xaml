@@ -12,6 +12,18 @@
     <SolidColorBrush x:Key="TealBrush" Color="{StaticResource Teal}" />
     <SolidColorBrush x:Key="IndigoBrush" Color="{StaticResource Indigo}" />
 
+    <Style TargetType="Button" x:Name="HeaderButton">
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Margin" Value="10 0"></Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Name="ActionButton">
+        <Setter Property="BorderBrush" Value="#4169E1"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="Background" Value="#4169E1"></Setter>
+    </Style>
+
     <Style TargetType="TextBlock" x:Name="PageTitle">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>

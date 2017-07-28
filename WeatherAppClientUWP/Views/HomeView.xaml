@@ -9,6 +9,86 @@
     DataContext="{Binding HomeVMInstance, Source={StaticResource Locator}}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="{Binding CustomCity}"/>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image Margin="10"
+                   Grid.Column="0"
+                   Source="/Assets/umbrella_logo.png"/>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Grid.Column="1">
+                <TextBlock FontSize="28">
+                    Fast Forecast
+                </TextBlock>
+                <TextBlock FontSize="14"
+                           TextAlignment="Left">
+                    Simple &amp; Precise &amp; Fast
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="3"
+                        Margin="10"
+                        Orientation="Horizontal">
+                <Button Style="{StaticResource HeaderButton}"
+                        Command="{Binding ManageCitiesCommand}">
+                    MANAGE CITIES
+                </Button>
+                <Button Style="{StaticResource HeaderButton}"
+                        Command="{Binding PreviousRequestsCommand}">
+                    PREVIOUS REQUESTS
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Image Source="/Assets/family.png"
+               Margin="20 0"
+               Grid.Row="1"/>
+        <StackPanel Margin="30"
+                    Width="200"
+                    Grid.Row="2"
+                    HorizontalAlignment="Center">
+            <TextBlock Margin="0 5" 
+                           HorizontalAlignment="Left">
+                Select city:
+            </TextBlock>
+            <ComboBox ItemsSource="{Binding Cities}"
+                      Margin="0 5"
+                      HorizontalAlignment="Stretch" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Text}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox Text="{Binding CustomCity, Mode=TwoWay}"
+                         PlaceholderText="or type another city" />
+                <TextBlock Margin="0 10"  
+                           HorizontalAlignment="Left">
+                    Select period:
+                </TextBlock>
+            <ComboBox ItemsSource="{Binding Periods}"
+                      Margin="0 5"
+                      HorizontalAlignment="Stretch" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Text}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Style="{StaticResource ActionButton}" 
+                    Margin="0 30 0 0"
+                    Command="{Binding ShowForecastCommand}"
+                    HorizontalAlignment="Stretch">
+                    SHOW FORECAST
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

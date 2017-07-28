@@ -18,6 +18,9 @@ namespace WeatherAppClientUWP
 
             var navigationService = new NavigationService();
             navigationService.Configure(nameof(HomeViewModel), typeof(HomeView));
+            navigationService.Configure(nameof(ManageCitiesViewModel), typeof(ManageCitiesView));
+            navigationService.Configure(nameof(PreviousRequestsViewModel), typeof(PreviousRequestsView));
+            navigationService.Configure(nameof(ForecastViewModel), typeof(ForecastView));
             //navigationService.Configure(nameof(StudentViewModel), typeof(StudentView));
 
             if (ViewModelBase.IsInDesignModeStatic)
@@ -33,7 +36,9 @@ namespace WeatherAppClientUWP
             //SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
             SimpleIoc.Default.Register<HomeViewModel>();
-            //SimpleIoc.Default.Register<StudentViewModel>();
+            SimpleIoc.Default.Register<ManageCitiesViewModel>();
+            SimpleIoc.Default.Register<PreviousRequestsViewModel>();
+            SimpleIoc.Default.Register<ForecastViewModel>();
 
             ServiceLocator.Current.GetInstance<HomeViewModel>();
         }
@@ -54,18 +59,47 @@ namespace WeatherAppClientUWP
         }
 
         // <summary>
-        // Gets the Student view model.
+        // Gets the Manage cities view model.
         // </summary>
         // <value>
-        // The Student view model.
+        // The Manage cities view model.
         // </value>
-        //public StudentViewModel StudentVMInstance
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<StudentViewModel>();
-        //    }
-        //}
+        public ManageCitiesViewModel ManageCitiesVMInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ManageCitiesViewModel>();
+            }
+        }
+
+        // <summary>
+        // Gets the Previous requests view model.
+        // </summary>
+        // <value>
+        // The Previous requestsview model.
+        // </value>
+        public PreviousRequestsViewModel PreviousRequestsVMInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PreviousRequestsViewModel>();
+            }
+        }
+
+        // <summary>
+        // Gets the Forecast view model.
+        // </summary>
+        // <value>
+        // The Forecast view model.
+        // </value>
+        public ForecastViewModel ForecastVMInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ForecastViewModel>();
+            }
+        }
+
 
         // <summary>
         // The cleanup.
