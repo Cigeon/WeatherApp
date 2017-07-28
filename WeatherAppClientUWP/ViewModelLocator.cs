@@ -18,7 +18,7 @@ namespace WeatherAppClientUWP
 
             var navigationService = new NavigationService();
             navigationService.Configure(nameof(HomeViewModel), typeof(HomeView));
-            navigationService.Configure(nameof(ManageCitiesViewModel), typeof(ManageCitiesView));
+            navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
             navigationService.Configure(nameof(PreviousRequestsViewModel), typeof(PreviousRequestsView));
             navigationService.Configure(nameof(ForecastViewModel), typeof(ForecastView));
             //navigationService.Configure(nameof(StudentViewModel), typeof(StudentView));
@@ -36,7 +36,7 @@ namespace WeatherAppClientUWP
             //SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
             SimpleIoc.Default.Register<HomeViewModel>();
-            SimpleIoc.Default.Register<ManageCitiesViewModel>();
+            SimpleIoc.Default.Register<CitiesViewModel>();
             SimpleIoc.Default.Register<PreviousRequestsViewModel>();
             SimpleIoc.Default.Register<ForecastViewModel>();
 
@@ -59,16 +59,16 @@ namespace WeatherAppClientUWP
         }
 
         // <summary>
-        // Gets the Manage cities view model.
+        // Gets the Cities view model.
         // </summary>
         // <value>
-        // The Manage cities view model.
+        // The Cities view model.
         // </value>
-        public ManageCitiesViewModel ManageCitiesVMInstance
+        public CitiesViewModel CitiesVMInstance
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ManageCitiesViewModel>();
+                return ServiceLocator.Current.GetInstance<CitiesViewModel>();
             }
         }
 

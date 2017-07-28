@@ -60,6 +60,8 @@
                 Select city:
             </TextBlock>
             <ComboBox ItemsSource="{Binding Cities}"
+                      SelectedValue="{Binding City, Mode=TwoWay}"
+                      IsEnabled="{Binding CitiesIsEnabled}"
                       Margin="0 5"
                       HorizontalAlignment="Stretch" >
                 <ComboBox.ItemTemplate>
@@ -75,6 +77,7 @@
                     Select period:
                 </TextBlock>
             <ComboBox ItemsSource="{Binding Periods}"
+                      SelectedValue="{Binding Period, Mode=TwoWay}"
                       Margin="0 5"
                       HorizontalAlignment="Stretch" >
                 <ComboBox.ItemTemplate>

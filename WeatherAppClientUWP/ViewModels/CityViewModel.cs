@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeatherAppClientUWP.ViewModels
 {
-    public class ManageCitiesViewModel : BaseViewModel
+    public class CityViewModel : BaseViewModel
     {
-
     }
 }

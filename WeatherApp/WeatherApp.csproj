@@ -173,6 +173,7 @@
   <ItemGroup>
     <Compile Include="Api\CitiesController.cs" />
     <Compile Include="Api\HistoryController.cs" />
+    <Compile Include="Api\PeriodsController.cs" />
     <Compile Include="Api\WeatherController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DbInitializer.cs" />

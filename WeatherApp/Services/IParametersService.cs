@@ -10,5 +10,6 @@ namespace WeatherApp.Services
         void AddParameter(SelectedPeriod period);
         List<SelectListItem> GetCities();
         List<SelectListItem> GetPeriods();
+        List<SelectedPeriod> GetPeriodsForApi();
     }
 }

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using WeatherAppClientUWP.Models;
 using WeatherAppClientUWP.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace WeatherAppClientUWP.ViewModels
 {
@@ -16,26 +17,74 @@ namespace WeatherAppClientUWP.ViewModels
         public HomeViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            _weatherService = new WeatherService();
-            Cities = _weatherService.GetCities();
-            Periods = _weatherService.GetPeriods();
+            _weatherService = new WeatherService();            
             ManageCitiesCommand = new RelayCommand(GoToManageCities);
             PreviousRequestsCommand = new RelayCommand(GoToPreviousRequest);
             ShowForecastCommand = new RelayCommand(GoToForecast);
-        }           
+            _citiesIsEnabled = true;
+            Cities = _weatherService.GetCitiesAsync().Result;
+            Periods = _weatherService.GetPeriodsAsync().Result;
+        }
+
+        private async Task GetParametersAsync()
+        {
+            Cities = await _weatherService.GetCitiesAsync();
+            Periods = await _weatherService.GetPeriodsAsync();
+        }
 
         public ObservableCollection<SelectedCity> Cities { get; set; }
 
         public ObservableCollection<SelectedPeriod> Periods { get; set; }
 
-        private string customCity;
-        public string CustomCity
+        private SelectedCity _city;
+        public SelectedCity City
         {
-            get { return customCity; }
+            get { return _city; }
             set
             {
-                customCity = value;
-                RaisePropertyChanged(() => Title);
+                _city = value;
+                RaisePropertyChanged(() => City);
+            }
+        }
+
+        private bool _citiesIsEnabled;
+        public bool CitiesIsEnabled
+        {
+            get { return _citiesIsEnabled; }
+            set
+            {
+                _citiesIsEnabled = value;
+                RaisePropertyChanged(() => CitiesIsEnabled);
+            }
+        }
+
+        private string _customCity;
+        public string CustomCity
+        {
+            get { return _customCity; }
+            set
+            {
+                _customCity = value;
+                if (_customCity != "")
+                {
+                    CitiesIsEnabled = false;
+                }
+                else
+                {
+                    CitiesIsEnabled = true;
+                }
+                RaisePropertyChanged(() => CustomCity);
+            }
+        }
+
+        private SelectedPeriod _period;
+        public SelectedPeriod Period
+        {
+            get { return _period; }
+            set
+            {
+                _period = value;
+                RaisePropertyChanged(() => Period);
             }
         }
 
@@ -45,7 +94,7 @@ namespace WeatherAppClientUWP.ViewModels
 
         private void GoToManageCities()
         {
-            _navigationService.NavigateTo(nameof(ManageCitiesViewModel));
+            _navigationService.NavigateTo(nameof(CitiesViewModel));
         }
 
         private void GoToPreviousRequest()
@@ -55,6 +104,14 @@ namespace WeatherAppClientUWP.ViewModels
 
         private void GoToForecast()
         {
+            var request = new WeatherRequest
+            {
+                City = City.Value,
+                CustomCity = CustomCity,
+                Period = Period.Value
+            };
+
+            MessengerInstance.Send(request);
             _navigationService.NavigateTo(nameof(ForecastViewModel));
         }
     }

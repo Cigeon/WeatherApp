@@ -58,6 +58,16 @@ namespace WeatherApp.Repositories
         }
 
         /// <summary>
+        /// Get list of selected periods for API
+        /// </summary>
+        /// <returns></returns>
+        public List<SelectedPeriod> GetPeriodsForApi()
+        {
+            var periods = db.SelectedPeriods.ToList();
+            return periods;
+        }
+
+        /// <summary>
         /// Dispose db context
         /// </summary>
         public void Dispose()
