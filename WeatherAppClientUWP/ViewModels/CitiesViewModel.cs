@@ -22,6 +22,7 @@ namespace WeatherAppClientUWP.ViewModels
         {
             _navigationService = navigationService;
             _weatherService = new WeatherService();
+            Cities = new ObservableCollection<SelectedCity>();
             HideAllPopups();
             CreateCommand = new RelayCommand(CreateMenu);
             EditCommand = new RelayCommand(EditMenu);
@@ -41,36 +42,53 @@ namespace WeatherAppClientUWP.ViewModels
         {
             try
             {
-                Cities = _weatherService.GetCitiesAsync().Result;
+                var result = _weatherService.GetCitiesAsync().Result;
+                Cities.Clear();
+                foreach (var item in result)
+                {
+                    Cities.Add(item);
+                }
             }
             catch (Exception)
             {
-                HideAllPopups();
                 // Show error page
                 _navigationService.NavigateTo(nameof(ErrorViewModel));
             }
-
+            finally
+            {
+                HideAllPopups();
+            }
         }
 
         private void CreateCity()
         {
             try
             {
-                if (NewCity.Text.Equals(String.Empty))
+                if (NewCity.Equals(String.Empty))
+                    throw new ArgumentOutOfRangeException();
+
+                var city = new SelectedCity
                 {
-                    NewCity.Value = NewCity.Text;
-                    // Send post request
-                }
-                else
-                {
-                    throw new ArgumentNullException();
-                }
+                    Text = NewCity,
+                    Value = NewCity
+                };
+                // Send post request
+                _weatherService.CreateCity(city);
+                // Update city list
+                GetCities();
+
             }
             catch (Exception)
             {
-                HideAllPopups();
                 // Show error page
                 _navigationService.NavigateTo(nameof(ErrorViewModel));
+            }
+            finally
+            {
+                NewCity = String.Empty;
+                HideAllPopups();
+                // Update city list
+                GetCities();
             }
         }
 
@@ -78,21 +96,26 @@ namespace WeatherAppClientUWP.ViewModels
         {
             try
             {
-                if (NewCity.Text.Equals(String.Empty))
-                {
-                    NewCity.Value = NewCity.Text;
-                    // Send post request
-                }
-                else
-                {
-                    throw new ArgumentNullException();
-                }
+                if (SelectedCity.Text.Equals(String.Empty))
+                    throw new ArgumentOutOfRangeException();
+                // Copy text to value
+                SelectedCity.Value = SelectedCity.Text;
+                // Send post request
+                _weatherService.EditCity(SelectedCity);
+                // Update city list
+                GetCities();
+
             }
             catch (Exception)
             {
-                HideAllPopups();
                 // Show error page
                 _navigationService.NavigateTo(nameof(ErrorViewModel));
+            }
+            finally
+            {
+                HideAllPopups();
+                // Update city list
+                GetCities();
             }
         }
 
@@ -101,12 +124,23 @@ namespace WeatherAppClientUWP.ViewModels
             try
             {
                 //Send delete request
+                if (SelectedCity == null)
+                    throw new NullReferenceException();
+                // Send post request
+                _weatherService.DeleteCity(SelectedCity.Id);
+                // Update city list
+                GetCities();
             }
             catch (Exception)
             {
-                HideAllPopups();
                 // Show error page
                 _navigationService.NavigateTo(nameof(ErrorViewModel));
+            }
+            finally
+            {
+                HideAllPopups();
+                // Update city list
+                GetCities();
             }
         }
 
@@ -135,8 +169,8 @@ namespace WeatherAppClientUWP.ViewModels
             }
         }
 
-        private SelectedCity _newCity;
-        public SelectedCity NewCity
+        private string _newCity;
+        public string NewCity
         {
             get { return _newCity; }
             set
@@ -238,8 +272,7 @@ namespace WeatherAppClientUWP.ViewModels
         private void DeleteMenu()
         {
             HideAllPopups();
-            _navigationService.NavigateTo(nameof(ErrorViewModel));
-            //DeleteIsVisible = true;
+            DeleteIsVisible = Visibility.Visible;
         }
 
         private void HideAllPopups()

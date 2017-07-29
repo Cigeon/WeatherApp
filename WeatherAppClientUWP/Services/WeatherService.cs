@@ -96,5 +96,84 @@ namespace WeatherAppClientUWP.Services
                 }
             }
         }
+
+        public async Task CreateCity(SelectedCity city)
+        {
+            // Check if city not null
+            if (city == null)
+                throw new NullReferenceException();
+
+            using (var client = new HttpClient())
+            {                          
+                client.BaseAddress = new Uri(apiUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/Cities", city);
+
+                if (response.IsSuccessStatusCode)
+                {  
+                    Uri returnUrl = response.Headers.Location;
+                    return;
+                }
+                else
+                {
+                    throw new HttpRequestException();
+                }
+            }
+        }
+
+        public async Task EditCity(SelectedCity city)
+        {
+            // Check if city not null
+            if (city == null)
+                throw new NullReferenceException();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PutAsJsonAsync($"api/Cities/{city.Id}", city);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Uri returnUrl = response.Headers.Location;
+                    return;
+                }
+                else
+                {
+                    throw new HttpRequestException();
+                }
+            }
+        }
+
+        public async Task DeleteCity(int? id)
+        {
+            // Check if id not null
+            if (id == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.DeleteAsync($"api/Cities/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return;
+                }
+                else
+                {
+                    throw new HttpRequestException();
+                }
+            }
+        }
     }
 }

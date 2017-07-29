@@ -10,5 +10,8 @@ namespace WeatherAppClientUWP.Services
         Task<ObservableCollection<SelectedCity>> GetCitiesAsync();
         Task<ObservableCollection<SelectedPeriod>> GetPeriodsAsync();
         Task<WeatherForecast> GetWeatherForecast(WeatherRequest weatherRequest);
+        Task CreateCity(SelectedCity city);
+        Task EditCity(SelectedCity city);
+        Task DeleteCity(int? id);
     }
 }

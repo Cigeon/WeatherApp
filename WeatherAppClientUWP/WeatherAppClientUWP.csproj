@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\TextNotEmptyConverter.cs" />
     <Compile Include="Converters\ImagePathConverter.cs" />
     <Compile Include="Converters\TemperatureConverter .cs" />
     <Compile Include="Converters\DateUtcConverter.cs" />
@@ -211,6 +212,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.3</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.2.3</Version>
     </PackageReference>
