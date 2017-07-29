@@ -23,16 +23,15 @@ namespace WeatherAppClientUWP.ViewModels
             PreviousRequestsCommand = new RelayCommand(GoToPreviousRequest);
             ShowForecastCommand = new RelayCommand(GoToForecast);
             _citiesIsEnabled = true;
-            Cities = _weatherService.GetCitiesAsync().Result;
-            Periods = _weatherService.GetPeriodsAsync().Result;
+            GetParameters();
             City = Cities[0];
             Period = Periods[0];
         }
 
-        private async Task GetParametersAsync()
+        private void GetParameters()
         {
-            Cities = await _weatherService.GetCitiesAsync();
-            Periods = await _weatherService.GetPeriodsAsync();
+            Cities = _weatherService.GetCitiesAsync().Result;
+            Periods = _weatherService.GetPeriodsAsync().Result;
         }
 
         public ObservableCollection<SelectedCity> Cities { get; set; }

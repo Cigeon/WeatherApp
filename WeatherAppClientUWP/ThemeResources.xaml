@@ -14,6 +14,14 @@
         <Setter Property="Background" Value="Transparent"></Setter>
         <Setter Property="Margin" Value="10 0"></Setter>
     </Style>
+    
+    <Style TargetType="Button" x:Name="ListButton">
+        <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+        <Setter Property="BorderBrush" Value="#4169E1"></Setter>
+        <Setter Property="Foreground" Value="#4169E1"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Margin" Value="5 0"></Setter>
+    </Style>
 
     <Style TargetType="Button" x:Name="ActionButton">
         <Setter Property="BorderBrush" Value="#4169E1"></Setter>
@@ -45,6 +53,11 @@
     <Style TargetType="Border" x:Name="TableCellBorder">
         <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
         <Setter Property="BorderBrush" Value="LightGray"></Setter>
+    </Style>
+
+    <Style TargetType="Popup" x:Name="PopupWindow">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
     </Style>
 
 </ResourceDictionary>

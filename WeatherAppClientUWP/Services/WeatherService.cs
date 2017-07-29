@@ -31,7 +31,7 @@ namespace WeatherAppClientUWP.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("api/Cities");
+                HttpResponseMessage response = await client.GetAsync("api/Cities").ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonString = await response.Content.ReadAsStringAsync();
@@ -55,7 +55,7 @@ namespace WeatherAppClientUWP.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("api/Periods");
+                HttpResponseMessage response = await client.GetAsync("api/Periods").ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonString = await response.Content.ReadAsStringAsync();

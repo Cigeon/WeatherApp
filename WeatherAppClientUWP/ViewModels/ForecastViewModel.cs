@@ -66,7 +66,7 @@ namespace WeatherAppClientUWP.ViewModels
             set
             {
                 _pageTitle = value;
-                RaisePropertyChanged(() => Forecast);
+                RaisePropertyChanged(() => PageTitle);
             }
         }
 
