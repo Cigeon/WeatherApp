@@ -40,7 +40,7 @@ namespace WeatherAppClientUWP
             SimpleIoc.Default.Register<CitiesViewModel>();
             SimpleIoc.Default.Register<PreviousRequestsViewModel>();            
             SimpleIoc.Default.Register<ForecastViewModel>(true);
-            SimpleIoc.Default.Register<ErrorViewModel>();
+            SimpleIoc.Default.Register<ErrorViewModel>(true);
 
             ServiceLocator.Current.GetInstance<HomeViewModel>();
         }

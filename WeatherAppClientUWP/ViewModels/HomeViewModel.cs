@@ -23,9 +23,7 @@ namespace WeatherAppClientUWP.ViewModels
             PreviousRequestsCommand = new RelayCommand(GoToPreviousRequest);
             ShowForecastCommand = new RelayCommand(GoToForecast);
             _citiesIsEnabled = true;
-            GetParameters();
-            City = Cities[0];
-            Period = Periods[0];
+            GetParameters();            
         }
 
         private void GetParameters()
@@ -34,11 +32,13 @@ namespace WeatherAppClientUWP.ViewModels
             {
                 Cities = _weatherService.GetCitiesAsync().Result;
                 Periods = _weatherService.GetPeriodsAsync().Result;
+                City = Cities[0];
+                Period = Periods[0];
             }
             catch (Exception)
             {
                 // Show error page
-                _navigationService.NavigateTo(nameof(ErrorViewModel));
+                //_navigationService.NavigateTo(nameof(ErrorViewModel));
             }
             
         }
