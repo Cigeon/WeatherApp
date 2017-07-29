@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WeatherAppClientUWP.Models;
 using WeatherAppClientUWP.Services;
+using Windows.UI.Xaml;
 
 namespace WeatherAppClientUWP.ViewModels
 {
@@ -21,11 +22,15 @@ namespace WeatherAppClientUWP.ViewModels
         {
             _navigationService = navigationService;
             _weatherService = new WeatherService();
-            CreateCommand = new RelayCommand(CreateCity);
-            EditCommand = new RelayCommand(EditCity);
-            DetailsCommand = new RelayCommand(DetailsCity);
-            DeleteCommand = new RelayCommand(DeleteCity);
+            HideAllPopups();
+            CreateCommand = new RelayCommand(CreateMenu);
+            EditCommand = new RelayCommand(EditMenu);
+            DetailsCommand = new RelayCommand(DetailsMenu);
+            DeleteCommand = new RelayCommand(DeleteMenu);
             CancelCommand = new RelayCommand(HideAllPopups);
+            CreateCityCommand = new RelayCommand(CreateCity);
+            SaveCityCommand = new RelayCommand(SaveCity);
+            DeleteCityCommand = new RelayCommand(DeleteCity);
             GoBackCommand = new RelayCommand(GoBack);
 
             PageTitle = "Cities";
@@ -34,7 +39,75 @@ namespace WeatherAppClientUWP.ViewModels
 
         private void GetCities()
         {
-            Cities = _weatherService.GetCitiesAsync().Result;
+            try
+            {
+                Cities = _weatherService.GetCitiesAsync().Result;
+            }
+            catch (Exception)
+            {
+                HideAllPopups();
+                // Show error page
+                _navigationService.NavigateTo(nameof(ErrorViewModel));
+            }
+
+        }
+
+        private void CreateCity()
+        {
+            try
+            {
+                if (NewCity.Text.Equals(String.Empty))
+                {
+                    NewCity.Value = NewCity.Text;
+                    // Send post request
+                }
+                else
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+            catch (Exception)
+            {
+                HideAllPopups();
+                // Show error page
+                _navigationService.NavigateTo(nameof(ErrorViewModel));
+            }
+        }
+
+        private void SaveCity()
+        {
+            try
+            {
+                if (NewCity.Text.Equals(String.Empty))
+                {
+                    NewCity.Value = NewCity.Text;
+                    // Send post request
+                }
+                else
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+            catch (Exception)
+            {
+                HideAllPopups();
+                // Show error page
+                _navigationService.NavigateTo(nameof(ErrorViewModel));
+            }
+        }
+
+        private void DeleteCity()
+        {
+            try
+            {
+                //Send delete request
+            }
+            catch (Exception)
+            {
+                HideAllPopups();
+                // Show error page
+                _navigationService.NavigateTo(nameof(ErrorViewModel));
+            }
         }
 
         public ObservableCollection<SelectedCity> Cities { get; set; }
@@ -73,8 +146,8 @@ namespace WeatherAppClientUWP.ViewModels
             }
         }
 
-        private bool _showMenuVidible;
-        public bool ShowMenuIsVisible
+        private Visibility _showMenuVidible;
+        public Visibility ShowMenuIsVisible
         {
             get { return _showMenuVidible; }
             set
@@ -84,8 +157,8 @@ namespace WeatherAppClientUWP.ViewModels
             }
         }
 
-        private bool _createVidible;
-        public bool CreateIsVisible
+        private Visibility _createVidible;
+        public Visibility CreateIsVisible
         {
             get { return _createVidible; }
             set
@@ -95,8 +168,8 @@ namespace WeatherAppClientUWP.ViewModels
             }
         }
 
-        private bool _editVidible;
-        public bool EditIsVisible
+        private Visibility _editVidible;
+        public Visibility EditIsVisible
         {
             get { return _editVidible; }
             set
@@ -106,8 +179,8 @@ namespace WeatherAppClientUWP.ViewModels
             }
         }
 
-        private bool _detailsVidible;
-        public bool DetailsIsVisible
+        private Visibility _detailsVidible;
+        public Visibility DetailsIsVisible
         {
             get { return _detailsVidible; }
             set
@@ -117,8 +190,8 @@ namespace WeatherAppClientUWP.ViewModels
             }
         }
 
-        private bool _deleteVidible;
-        public bool DeleteIsVisible
+        private Visibility _deleteVidible;
+        public Visibility DeleteIsVisible
         {
             get { return _deleteVidible; }
             set
@@ -133,45 +206,49 @@ namespace WeatherAppClientUWP.ViewModels
         public ICommand DetailsCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        public ICommand CreateCityCommand { get; set; }
+        public ICommand SaveCityCommand { get; set; }
+        public ICommand DeleteCityCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
 
         private void ShowMenu()
         {
             HideAllPopups();
-            ShowMenuIsVisible = true;
+            ShowMenuIsVisible = Visibility.Visible;
         }
 
-        private void CreateCity()
+        private void CreateMenu()
         {
             HideAllPopups();
-            CreateIsVisible = true;
+            CreateIsVisible = Visibility.Visible;
         }
 
-        private void EditCity()
+        private void EditMenu()
         {
             HideAllPopups();
-            EditIsVisible = true;
+            EditIsVisible = Visibility.Visible;
         }
 
-        private void DetailsCity()
+        private void DetailsMenu()
         {
             HideAllPopups();
-            DetailsIsVisible = true;
+            DetailsIsVisible = Visibility.Visible;
         }
 
-        private void DeleteCity()
+        private void DeleteMenu()
         {
             HideAllPopups();
-            DeleteIsVisible = true;
+            _navigationService.NavigateTo(nameof(ErrorViewModel));
+            //DeleteIsVisible = true;
         }
 
         private void HideAllPopups()
         {
-            ShowMenuIsVisible = false;
-            CreateIsVisible = false;
-            EditIsVisible = false;
-            DetailsIsVisible = false;
-            DeleteIsVisible = false;
+            ShowMenuIsVisible = Visibility.Collapsed;
+            CreateIsVisible = Visibility.Collapsed;
+            EditIsVisible = Visibility.Collapsed;
+            DetailsIsVisible = Visibility.Collapsed;
+            DeleteIsVisible = Visibility.Collapsed;
         }
 
         private void GoBack()

@@ -21,6 +21,7 @@ namespace WeatherAppClientUWP
             navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
             navigationService.Configure(nameof(PreviousRequestsViewModel), typeof(PreviousRequestsView));
             navigationService.Configure(nameof(ForecastViewModel), typeof(ForecastView));
+            navigationService.Configure(nameof(ErrorViewModel), typeof(ErrorView));
             //navigationService.Configure(nameof(StudentViewModel), typeof(StudentView));
 
             if (ViewModelBase.IsInDesignModeStatic)
@@ -37,8 +38,9 @@ namespace WeatherAppClientUWP
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
             SimpleIoc.Default.Register<HomeViewModel>();
             SimpleIoc.Default.Register<CitiesViewModel>();
-            SimpleIoc.Default.Register<PreviousRequestsViewModel>();
+            SimpleIoc.Default.Register<PreviousRequestsViewModel>();            
             SimpleIoc.Default.Register<ForecastViewModel>(true);
+            SimpleIoc.Default.Register<ErrorViewModel>();
 
             ServiceLocator.Current.GetInstance<HomeViewModel>();
         }
@@ -100,6 +102,19 @@ namespace WeatherAppClientUWP
             }
         }
 
+        // <summary>
+        // Gets the Error view model.
+        // </summary>
+        // <value>
+        // The Error view model.
+        // </value>
+        public ErrorViewModel ErrorVMInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ErrorViewModel>();
+            }
+        }
 
         // <summary>
         // The cleanup.

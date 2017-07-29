@@ -30,8 +30,17 @@ namespace WeatherAppClientUWP.ViewModels
 
         private void GetParameters()
         {
-            Cities = _weatherService.GetCitiesAsync().Result;
-            Periods = _weatherService.GetPeriodsAsync().Result;
+            try
+            {
+                Cities = _weatherService.GetCitiesAsync().Result;
+                Periods = _weatherService.GetPeriodsAsync().Result;
+            }
+            catch (Exception)
+            {
+                // Show error page
+                _navigationService.NavigateTo(nameof(ErrorViewModel));
+            }
+            
         }
 
         public ObservableCollection<SelectedCity> Cities { get; set; }
