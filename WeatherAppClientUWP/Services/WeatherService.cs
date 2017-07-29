@@ -30,7 +30,7 @@ namespace WeatherAppClientUWP.Services
                 client.BaseAddress = new Uri(apiUri);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
- 
+
                 HttpResponseMessage response = await client.GetAsync("api/Cities");
                 if (response.IsSuccessStatusCode)
                 {
@@ -60,6 +60,35 @@ namespace WeatherAppClientUWP.Services
                 {
                     string jsonString = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<ObservableCollection<SelectedPeriod>>(jsonString);
+                }
+                else
+                {
+                    throw new HttpRequestException();
+                }
+            }
+        }
+
+        public async Task<WeatherForecast> GetWeatherForecast(WeatherRequest weatherRequest)
+        {
+            using (var client = new HttpClient())
+            {
+                // Define city for weather forecast
+                var city = weatherRequest.City;
+                // Check if custom city was typed
+                if (weatherRequest.CustomCity != null)
+                    city = weatherRequest.CustomCity;
+
+                client.BaseAddress = new Uri(apiUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync($"api/Weather/{city}/{weatherRequest.Period}").ConfigureAwait(false);
+                // HttpResponseMessage response = await client.GetAsync("api/Periods");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonString = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<WeatherForecast>(jsonString);
                 }
                 else
                 {

@@ -9,5 +9,6 @@ namespace WeatherAppClientUWP.Services
     {
         Task<ObservableCollection<SelectedCity>> GetCitiesAsync();
         Task<ObservableCollection<SelectedPeriod>> GetPeriodsAsync();
+        Task<WeatherForecast> GetWeatherForecast(WeatherRequest weatherRequest);
     }
 }

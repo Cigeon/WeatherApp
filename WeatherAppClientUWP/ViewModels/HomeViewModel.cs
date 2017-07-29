@@ -6,6 +6,7 @@ using WeatherAppClientUWP.Models;
 using WeatherAppClientUWP.Services;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Practices.ServiceLocation;
 
 namespace WeatherAppClientUWP.ViewModels
 {
@@ -24,6 +25,8 @@ namespace WeatherAppClientUWP.ViewModels
             _citiesIsEnabled = true;
             Cities = _weatherService.GetCitiesAsync().Result;
             Periods = _weatherService.GetPeriodsAsync().Result;
+            City = Cities[0];
+            Period = Periods[0];
         }
 
         private async Task GetParametersAsync()
@@ -110,8 +113,8 @@ namespace WeatherAppClientUWP.ViewModels
                 CustomCity = CustomCity,
                 Period = Period.Value
             };
-
-            MessengerInstance.Send(request);
+          
+            MessengerInstance.Send(request, "forecast");
             _navigationService.NavigateTo(nameof(ForecastViewModel));
         }
     }

@@ -31,19 +31,4 @@
         <Setter Property="FontSize" Value="19"></Setter>
     </Style>
 
-    <Style TargetType="TextBlock" x:Name="DetailsText">
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        <Setter Property="Foreground" Value="Black"></Setter>
-        <Setter Property="FontWeight" Value="SemiBold"></Setter>
-        <Setter Property="FontSize" Value="18"></Setter>
-        <Setter Property="TextAlignment" Value="Left"></Setter>
-    </Style>
-
-    <Style TargetType="TextBlock" x:Name="DetailsHint" BasedOn="{StaticResource DetailsText}">
-        <Setter Property="Foreground" Value="#3D3D3D"></Setter>
-        <Setter Property="TextAlignment" Value="Right"></Setter>
-        <Setter Property="Padding" Value="0,0,20,0"></Setter>
-        <Setter Property="FontWeight" Value="Normal"></Setter>
-    </Style>
-
 </ResourceDictionary>

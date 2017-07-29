@@ -9,6 +9,9 @@
     DataContext="{Binding ForecastVMInstance, Source={StaticResource Locator}}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="Forecast" />
+        <StackPanel>
+            <ProgressRing Visibility="Visible" Foreground="Aqua" Height="97" Margin="710,0,594,0" Width="136" />
+            <TextBlock Text="{Binding Request.City}" />
+        </StackPanel>
     </Grid>
 </Page>
