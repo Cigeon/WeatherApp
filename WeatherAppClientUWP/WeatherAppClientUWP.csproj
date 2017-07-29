@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ImagePathConverter.cs" />
+    <Compile Include="Converters\TemperatureConverter .cs" />
+    <Compile Include="Converters\DateUtcConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -137,8 +140,28 @@
     <None Include="WeatherAppClientUWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\01d.png" />
+    <Content Include="Assets\01n.png" />
+    <Content Include="Assets\02d.png" />
+    <Content Include="Assets\02n.png" />
+    <Content Include="Assets\03d.png" />
+    <Content Include="Assets\03n.png" />
+    <Content Include="Assets\04d.png" />
+    <Content Include="Assets\04n.png" />
+    <Content Include="Assets\09d.png" />
+    <Content Include="Assets\09n.png" />
+    <Content Include="Assets\10d.png" />
+    <Content Include="Assets\10n.png" />
+    <Content Include="Assets\11d.png" />
+    <Content Include="Assets\11n.png" />
+    <Content Include="Assets\13d.png" />
+    <Content Include="Assets\13n.png" />
+    <Content Include="Assets\50d.png" />
+    <Content Include="Assets\50n.png" />
     <Content Include="Assets\family.png" />
+    <Content Include="Assets\SplashScreenWeather.scale-200.png" />
     <Content Include="Assets\umbrella_logo.png" />
+    <Content Include="Assets\weather_icon.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace WeatherAppClientUWP.ViewModels
             _navigationService = navigationService;
             _weatherService = new WeatherService();
 
-            ProgressRingIsVisible = Visibility.Visible;
+            GoBackCommand = new RelayCommand(GoBack);
 
             MessengerInstance.Register<WeatherRequest>(this, "forecast", (req) =>
             {
@@ -36,10 +37,15 @@ namespace WeatherAppClientUWP.ViewModels
             set
             {
                 _request = value;
-                Forecast = _weatherService.GetWeatherForecast(_request).Result;
-                //ProgressRingIsVisible = Visibility.Collapsed;
+                GetForecast();                
                 RaisePropertyChanged(() => Request);
             }
+        }
+
+        private void GetForecast()
+        {
+            Forecast = _weatherService.GetWeatherForecast(_request).Result;
+            PageTitle = $"{Forecast.City.Name} ({Forecast.ReqCity}), wather forecast for {Forecast.ReqPeriod} day(s)";
         }
 
         private WeatherForecast _forecast;
@@ -53,20 +59,20 @@ namespace WeatherAppClientUWP.ViewModels
             }
         }
 
-        private Visibility _prVisible;
-        public Visibility ProgressRingIsVisible
+        private string _pageTitle;
+        public string PageTitle
         {
-            get { return _prVisible; }
+            get { return _pageTitle; }
             set
             {
-                _prVisible = value;
-                RaisePropertyChanged(() => ProgressRingIsVisible);
+                _pageTitle = value;
+                RaisePropertyChanged(() => Forecast);
             }
         }
 
         public ICommand GoBackCommand { get; set; }
 
-        private void goBack()
+        private void GoBack()
         {
             _navigationService.GoBack();
         }

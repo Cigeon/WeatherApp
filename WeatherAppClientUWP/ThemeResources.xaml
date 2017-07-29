@@ -3,14 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WeatherAppClientUWP">
 
-    <Color x:Key="Teal">#009688</Color>
-    <Color x:Key="Indigo">#5C6BC0</Color>
-    <Color x:Key="Gray1">#676767</Color>
-    <Color x:Key="Gray2">#545861</Color>
+    <Color x:Key="Ultramarine">#4169E1</Color>
+    <Color x:Key="Loganberry">#3f4042</Color>
 
-    <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}" />
-    <SolidColorBrush x:Key="TealBrush" Color="{StaticResource Teal}" />
-    <SolidColorBrush x:Key="IndigoBrush" Color="{StaticResource Indigo}" />
+    <SolidColorBrush x:Key="UltramarineBrush" Color="{StaticResource Ultramarine}" />
+    <SolidColorBrush x:Key="LoganberryBrush" Color="{StaticResource Loganberry}" />
 
     <Style TargetType="Button" x:Name="HeaderButton">
         <Setter Property="BorderThickness" Value="0"></Setter>
@@ -26,9 +23,28 @@
 
     <Style TargetType="TextBlock" x:Name="PageTitle">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
-        <Setter Property="FontWeight" Value="Bold"></Setter>
-        <Setter Property="FontSize" Value="19"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="DarkSlateGray"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Name="RowHeader">
+        <Setter Property="Foreground" Value="DarkSlateGray"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="FontWeight" Value="Normal"></Setter>
+        <Setter Property="FontSize" Value="16"></Setter>
+        <Setter Property="Margin" Value="0 0 80 0"></Setter>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Name="RowData">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+    </Style>
+
+    <Style TargetType="Border" x:Name="TableCellBorder">
+        <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+        <Setter Property="BorderBrush" Value="LightGray"></Setter>
     </Style>
 
 </ResourceDictionary>
