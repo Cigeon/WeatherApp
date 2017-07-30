@@ -1,6 +1,44 @@
-<!-- content -->
 <div class="wrapper row1"> 
   <section id="slider">
     <img src="assets/images/family.png" alt="Happy family" />
   </section>
+
+  <div class="container content">
+    <md-select placeholder="Select city">
+      <md-option *ngFor="let food of foods" [value]="food.value">
+        {{ food.viewValue }}
+      </md-option>
+    </md-select>
+    <md-input-container>
+      <input mdInput placeholder="or type here" value="food">
+    </md-input-container>
+    <button md-raised-button>SHOW FORECAST</button>
+  </div>
+
+
+  <!-- <div class="form-group">
+  
+
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name"
+          required
+          [(ngModel)]="model.name" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="alterEgo">Alter Ego</label>
+    <input type="text"  class="form-control" id="alterEgo"
+          [(ngModel)]="model.alterEgo" name="alterEgo">
+  </div>
+
+  <div class="form-group">
+    <label for="power">Hero Power</label>
+    <select class="form-control"  id="power"
+            required
+            [(ngModel)]="model.power" name="power">
+      <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+    </select>
+  </div> -->
+
+
 </div>

@@ -1,9 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdToolbarModule } from '@angular/material';
+import { MdSelectModule } from '@angular/material';
+import { MdInputModule } from '@angular/material';
+import { MdButtonModule } from '@angular/material';
 
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { AppComponent } from './app.component';
 import { QueryComponent } from './query/query.component';
@@ -20,26 +26,13 @@ import { HistoryComponent } from './history/history.component';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        redirectTo: '/query',
-        pathMatch: 'full'
-      },
-      {
-        path: 'query',
-        component: QueryComponent
-      },
-      {
-        path: 'cities',
-        component: CitiesComponent
-      },
-      {
-        path: 'history',
-        component: HistoryComponent
-      }
-    ]),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     MdToolbarModule,
+    MdSelectModule,
+    MdInputModule,
+    MdButtonModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
