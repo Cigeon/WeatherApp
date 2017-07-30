@@ -24,7 +24,7 @@ namespace WeatherApp.Services
         }
 
         /// <summary>
-        /// Get the cities list
+        /// Get the cities list for UI
         /// </summary>
         /// <returns></returns>
         public List<SelectListItem> GetCities()
@@ -38,7 +38,7 @@ namespace WeatherApp.Services
             return cities;
         }
         /// <summary>
-        /// Get the periods list
+        /// Get the periods list for UI
         /// </summary>
         /// <returns></returns>
         public List<SelectListItem> GetPeriods()
@@ -47,6 +47,18 @@ namespace WeatherApp.Services
             periods.Add(new SelectListItem() { Text = "Current weather", Value = "1" });
             periods.Add(new SelectListItem() { Text = "For 3 days", Value = "3" });
             periods.Add(new SelectListItem() { Text = "For 7 days", Value = "7" });
+            return periods;
+        }
+        /// <summary>
+        /// Get the periods list for API
+        /// </summary>
+        /// <returns></returns>
+        public List<SelectedPeriod> GetPeriodsForApi()
+        {
+            List<SelectedPeriod> periods = new List<SelectedPeriod>();
+            periods.Add(new SelectedPeriod() { Text = "Current weather", Value = "1" });
+            periods.Add(new SelectedPeriod() { Text = "For 3 days", Value = "3" });
+            periods.Add(new SelectedPeriod() { Text = "For 7 days", Value = "7" });
             return periods;
         }
 
