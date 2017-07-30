@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using WeatherApp.Models;
 using WeatherApp.Services;
@@ -18,14 +19,14 @@ namespace WeatherApp.Api
         }
 
         // GET: api/Weather
-        public WeatherForecast Get()
+        public async Task<WeatherForecast> GetAsync()
         {
-            return weatherService.GetWeatherForecast(new WeatherRequest());
+            return await weatherService.GetWeatherForecastAsync(new WeatherRequest());
         }
 
         // GET: api/Weather/London/1
         [Route("api/Weather/{city}/{period}")]
-        public IHttpActionResult Get(string city, string period)
+        public async Task<IHttpActionResult> GetAsync(string city, string period)
         {
             // Check city parameter
             if (city.Length == 0)
@@ -46,7 +47,7 @@ namespace WeatherApp.Api
             };
 
             // Get forecast
-            var forecast = weatherService.GetWeatherForecast(request);
+            var forecast = await weatherService.GetWeatherForecastAsync(request);
 
             if (forecast == null)
                 return NotFound();

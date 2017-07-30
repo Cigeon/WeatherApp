@@ -1,6 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web.Configuration;
 using WeatherApp.Models;
 
@@ -33,7 +36,7 @@ namespace WeatherApp.Services
         /// </summary>
         /// <param name="weatherRequest"></param>
         /// <returns></returns>
-        public WeatherForecast GetWeatherForecast(WeatherRequest weatherRequest)
+        public async Task<WeatherForecast> GetWeatherForecastAsync(WeatherRequest weatherRequest)
         {
             // Define city for weather forecast
             city = weatherRequest.City;
@@ -45,21 +48,26 @@ namespace WeatherApp.Services
             // Uri parameters 
             token = WebConfigurationManager.AppSettings["OpenWeatherToken"];
             uri = WebConfigurationManager.AppSettings["OpenWeatherUri"];
-            uri += $"forecast/daily?q={city},uk&units=metric&cnt={weatherRequest.Period}&appid={token}";
+            var param = $"forecast/daily?q={city},uk&units=metric&cnt={weatherRequest.Period}&appid={token}";
 
             // Get data from open weather
             var json = "";
-            try
+            using (var client = new HttpClient())
             {
-                using (var client = new WebClient())
+                client.BaseAddress = new Uri(uri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync(param).ConfigureAwait(false);
+                if (response.IsSuccessStatusCode)
                 {
-                    json = client.DownloadString(uri);
+                    json = await response.Content.ReadAsStringAsync();                    
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
-            catch (WebException)
-            {
-                return null;
-            }                    
 
             // Deserialize json
             var data = JsonConvert.DeserializeObject<WeatherForecast>(json);

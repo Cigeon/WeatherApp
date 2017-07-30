@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Web.Mvc;
 using WeatherApp.Models;
 using WeatherApp.Services;
@@ -43,13 +44,13 @@ namespace WeatherApp.Controllers
             try
             {                
                 // Get forecast from open weather
-                var forecast = weatherService.GetWeatherForecast(weatherRequest);
+                var forecast = weatherService.GetWeatherForecastAsync(weatherRequest).Result;
                 // Save weather forecast                
                 historyService.SaveForecast(forecast);
                 
                 return View("ViewWeatherForecast", forecast);
             }
-            catch (WebException webEx)
+            catch (Exception)
             {
                 return RedirectToAction("Index", "Error");
             }
