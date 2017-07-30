@@ -21,6 +21,7 @@ namespace WeatherAppClientUWP
             navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
             navigationService.Configure(nameof(PreviousRequestsViewModel), typeof(PreviousRequestsView));
             navigationService.Configure(nameof(ForecastViewModel), typeof(ForecastView));
+            navigationService.Configure(nameof(HistoryForecastViewModel), typeof(HistoryForecastView));
             navigationService.Configure(nameof(ErrorViewModel), typeof(ErrorView));
             //navigationService.Configure(nameof(StudentViewModel), typeof(StudentView));
 
@@ -40,6 +41,7 @@ namespace WeatherAppClientUWP
             SimpleIoc.Default.Register<CitiesViewModel>();
             SimpleIoc.Default.Register<PreviousRequestsViewModel>();            
             SimpleIoc.Default.Register<ForecastViewModel>(true);
+            SimpleIoc.Default.Register<HistoryForecastViewModel>(true);
             SimpleIoc.Default.Register<ErrorViewModel>(true);
 
             ServiceLocator.Current.GetInstance<HomeViewModel>();
@@ -99,6 +101,20 @@ namespace WeatherAppClientUWP
             get
             {
                 return ServiceLocator.Current.GetInstance<ForecastViewModel>();
+            }
+        }
+
+        // <summary>
+        // Gets the History forecast view model.
+        // </summary>
+        // <value>
+        // The History forecast view model.
+        // </value>
+        public HistoryForecastViewModel HistoryForecastVMInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HistoryForecastViewModel>();
             }
         }
 

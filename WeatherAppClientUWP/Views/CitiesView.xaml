@@ -25,7 +25,8 @@
             <TextBlock Text="{Binding PageTitle}"
                        Style="{StaticResource PageTitle}" />
         </StackPanel>
-        <Grid Grid.Row="1" 
+        <Grid Grid.Row="1"
+              Width="300"
               HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />

@@ -83,7 +83,6 @@ namespace WeatherAppClientUWP.Services
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage response = await client.GetAsync($"api/Weather/{city}/{weatherRequest.Period}").ConfigureAwait(false);
-                // HttpResponseMessage response = await client.GetAsync("api/Periods");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -164,6 +163,81 @@ namespace WeatherAppClientUWP.Services
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage response = await client.DeleteAsync($"api/Cities/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return;
+                }
+                else
+                {
+                    throw new HttpRequestException();
+                }
+            }
+        }
+
+        public async Task<ObservableCollection<WeatherForecast>> GetForecastsAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("api/History").ConfigureAwait(false);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonString = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<ObservableCollection<WeatherForecast>>(jsonString);
+                }
+                else
+                {
+                    throw new HttpRequestException();
+                }
+            }
+        }
+
+        public async Task<WeatherForecast> GetForecastByIdAsync(int? id)
+        {
+            // Check if id not null
+            if (id == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync($"api/History/{id}").ConfigureAwait(false);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonString = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<WeatherForecast>(jsonString);
+                }
+                else
+                {
+                    throw new HttpRequestException();
+                }
+            }
+        }
+
+        public async Task DeleteForecast(int? id)
+        {
+            // Check if id not null
+            if (id == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.DeleteAsync($"api/History/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {

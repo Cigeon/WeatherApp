@@ -8,36 +8,35 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WeatherAppClientUWP.Models;
 using WeatherAppClientUWP.Services;
-using Windows.UI.Xaml;
 
 namespace WeatherAppClientUWP.ViewModels
 {
-    public class ForecastViewModel : BaseViewModel
+    public class HistoryForecastViewModel : BaseViewModel
     {
         private INavigationService _navigationService;
-        private IWeatherService _weatherService;        
+        private IWeatherService _weatherService;
 
-        public ForecastViewModel(INavigationService navigationService)
+        public HistoryForecastViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             _weatherService = new WeatherService();
 
             GoBackCommand = new RelayCommand(GoBack);
 
-            MessengerInstance.Register<WeatherRequest>(this, "forecast", (req) =>
+            MessengerInstance.Register<int>(this, "histForecast", (req) =>
             {
                 Request = req;
             });
         }
 
-        private WeatherRequest _request;
-        public WeatherRequest Request
+        private int _request;
+        public int Request
         {
             get { return _request; }
             set
             {
                 _request = value;
-                GetForecast();                
+                GetForecast();
                 RaisePropertyChanged(() => Request);
             }
         }
@@ -46,14 +45,15 @@ namespace WeatherAppClientUWP.ViewModels
         {
             try
             {
-                Forecast = _weatherService.GetWeatherForecast(_request).Result;
-                PageTitle = $"{Forecast.City.Name} ({Forecast.ReqCity}), wather forecast for {Forecast.ReqPeriod} day(s)";
+                Forecast = _weatherService.GetForecastByIdAsync(_request).Result;
+                PageTitle = $"{Forecast.Dt} {Forecast.City.Name} ({Forecast.ReqCity}), wather forecast for {Forecast.ReqPeriod} day(s)";
             }
             catch (Exception)
             {
                 // Show error page
                 _navigationService.NavigateTo(nameof(ErrorViewModel));
-            }            
+            }
+            
         }
 
         private WeatherForecast _forecast;
