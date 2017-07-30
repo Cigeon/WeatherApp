@@ -34,9 +34,9 @@ namespace WeatherApp.Tests.Mock.Repositories
 
         public void AddCity(SelectedCity city) { }
 
-        public void DeleteCity(int id) { }
+        public void DeleteCityAsync(int id) { }
 
-        public void EditCity(SelectedCity city) { }
+        public void EditCityAsync(SelectedCity city) { }
                
         public void Dispose() {  }
 

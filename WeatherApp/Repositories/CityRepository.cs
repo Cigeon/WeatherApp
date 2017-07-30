@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using WeatherApp.Models;
 using WeatherApp.Services;
 
@@ -20,37 +21,37 @@ namespace WeatherApp.Repositories
         /// Add city for selection
         /// </summary>
         /// <param name="city"></param>
-        public void AddCity(SelectedCity city)
+        public async Task AddCityAsync(SelectedCity city)
         {
             // Copy city name to value
             var c = city;
             c.Value = city.Text;
 
             db.SelectedCities.Add(c);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         /// <summary>
         /// Edit city and save it to database
         /// </summary>
         /// <param name="city"></param>
-        public void EditCity(SelectedCity city)
+        public async Task EditCityAsync(SelectedCity city)
         {
             // Copy city name to value
             var c = city;
             c.Value = city.Text;
 
             db.Entry(c).State = EntityState.Modified;
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         /// <summary>
         /// Delete city from database
         /// </summary>
         /// <param name="id"></param>
-        public void DeleteCity(int id)
+        public async Task DeleteCityAsync(int id)
         {
-            SelectedCity selectedCity = GetCityById(id);
+            SelectedCity selectedCity = await GetCityByIdAsync(id);
             db.SelectedCities.Attach(selectedCity);
             db.SelectedCities.Remove(selectedCity);
             db.SaveChanges();
@@ -61,12 +62,12 @@ namespace WeatherApp.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public SelectedCity GetCityById(int? id)
+        public async Task<SelectedCity> GetCityByIdAsync(int? id)
         {
             if (id == null) return null;
             try
             {
-                return db.SelectedCities.Find(id);
+                return await db.SelectedCities.FindAsync(id);
             }
             catch (InvalidOperationException)
             {
@@ -78,16 +79,16 @@ namespace WeatherApp.Repositories
         /// Get list of cities
         /// </summary>
         /// <returns></returns>
-        public List<SelectedCity> GetCities()
+        public async Task<List<SelectedCity>> GetCitiesAsync()
         {
             try
             {
-                return db.SelectedCities.ToList();
+                return await db.SelectedCities.ToListAsync();
             }
             catch (InvalidOperationException)
             {
                 return new List<SelectedCity>();
-            }            
+            }
         }
 
         /// <summary>

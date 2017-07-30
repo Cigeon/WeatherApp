@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
     public interface ICityService : IDisposable
     {
-        List<SelectedCity> GetCities();
-        SelectedCity GetCityById(int? id);
-        void AddCity(SelectedCity city);
-        void EditCity(SelectedCity city);
-        void DeleteCity(int id);
+        Task<List<SelectedCity>> GetCitiesAsync();
+        Task<SelectedCity> GetCityByIdAsync(int? id);
+        Task AddCityAsync(SelectedCity city);
+        Task EditCityAsync(SelectedCity city);
+        Task DeleteCityAsync(int id);
     }
 }

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WeatherApp.Models;
@@ -21,16 +22,16 @@ namespace WeatherApp.Api
         }
 
         // GET: api/Cities
-        public List<SelectedCity> GetCities()
+        public async Task<List<SelectedCity>> GetCities()
         {
-            return cityRepo.GetCities();
+            return await cityRepo.GetCitiesAsync();
         }
 
         // GET: api/Cities/5
         [ResponseType(typeof(City))]
-        public IHttpActionResult GetCity(int id)
+        public async Task<IHttpActionResult> GetCityAsync(int id)
         {
-            SelectedCity city = cityRepo.GetCityById(id);
+            SelectedCity city = await cityRepo.GetCityByIdAsync(id);
             if (city == null)
             {
                 return NotFound();
@@ -41,7 +42,7 @@ namespace WeatherApp.Api
 
         // PUT: api/Cities/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCity(int id, SelectedCity city)
+        public async Task<IHttpActionResult> PutCityAsync(int id, SelectedCity city)
         {
             if (!ModelState.IsValid)
             {
@@ -55,7 +56,7 @@ namespace WeatherApp.Api
 
             try
             {
-                cityRepo.EditCity(city);
+                await cityRepo.EditCityAsync(city);
             }
             catch (Exception)
             {
@@ -74,7 +75,7 @@ namespace WeatherApp.Api
 
         // POST: api/Cities
         [ResponseType(typeof(City))]
-        public IHttpActionResult PostCity(SelectedCity city)
+        public async Task<IHttpActionResult> PostCityAsync(SelectedCity city)
         {
             if (!ModelState.IsValid)
             {
@@ -88,21 +89,21 @@ namespace WeatherApp.Api
 
             try
             {
-                cityRepo.AddCity(city);
+                await cityRepo.AddCityAsync(city);
             }
             catch (Exception)
             {
                 return InternalServerError();
-            }            
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = city.Id }, city);
         }
 
         // DELETE: api/Cities/5
         [ResponseType(typeof(City))]
-        public IHttpActionResult DeleteCity(int id)
+        public async Task<IHttpActionResult> DeleteCityAsync(int id)
         {
-            var city = cityRepo.GetCityById(id);
+            var city = await cityRepo.GetCityByIdAsync(id);
             if (city == null)
             {
                 return NotFound();
@@ -110,7 +111,7 @@ namespace WeatherApp.Api
 
             try
             {
-                cityRepo.DeleteCity(city.Id);
+                await cityRepo.DeleteCityAsync(city.Id);
             }
             catch (Exception)
             {
@@ -122,7 +123,7 @@ namespace WeatherApp.Api
                 {
                     return InternalServerError();
                 }
-            }            
+            }
 
             return Ok(city);
         }
@@ -138,7 +139,7 @@ namespace WeatherApp.Api
 
         private bool CityExists(int id)
         {
-            return cityRepo.GetCities().Count(c => c.Id == id) > 0;
+            return cityRepo.GetCitiesAsync().Result.Count(c => c.Id == id) > 0;
         }
     }
 }

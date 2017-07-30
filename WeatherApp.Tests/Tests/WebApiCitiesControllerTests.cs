@@ -34,7 +34,7 @@ namespace WeatherApp.Tests.Tests
             var id = 1;
             var controller = DependencyResolver.Current.GetService<CitiesController>();
             // Act
-            var result = controller.GetCity(id) as OkNegotiatedContentResult<SelectedCity>;
+            var result = controller.GetCityAsync(id) as OkNegotiatedContentResult<SelectedCity>;
             // Assert
             Assert.IsInstanceOf<OkNegotiatedContentResult<SelectedCity>>(result);
             Assert.IsTrue(result.Content.Id == id);
@@ -47,7 +47,7 @@ namespace WeatherApp.Tests.Tests
             var id = 100;  // doesn't exist id
             var controller = DependencyResolver.Current.GetService<CitiesController>();
             // Act
-            var result = controller.GetCity(id) as NotFoundResult;
+            var result = controller.GetCityAsync(id) as NotFoundResult;
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
@@ -64,7 +64,7 @@ namespace WeatherApp.Tests.Tests
                 Value = "Kyiv"
             };
             // Act           
-            var result = controller.PutCity(city.Id, city) as StatusCodeResult;
+            var result = controller.PutCityAsync(city.Id, city) as StatusCodeResult;
             // Assert
             Assert.IsInstanceOf<StatusCodeResult>(result);
             Assert.IsTrue(result.StatusCode.Equals(HttpStatusCode.NoContent));
@@ -82,7 +82,7 @@ namespace WeatherApp.Tests.Tests
                 Value = "Kyiv"
             };
             // Act           
-            var result = controller.PutCity(city.Id++, city) as BadRequestResult;
+            var result = controller.PutCityAsync(city.Id++, city) as BadRequestResult;
             // Assert
             Assert.IsInstanceOf<BadRequestResult>(result);
         }
@@ -99,7 +99,7 @@ namespace WeatherApp.Tests.Tests
                 Value = "Kyiv"
             };
             // Act           
-            var result = controller.PutCity(city.Id, city) as NotFoundResult;
+            var result = controller.PutCityAsync(city.Id, city) as NotFoundResult;
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
@@ -116,7 +116,7 @@ namespace WeatherApp.Tests.Tests
                 Value = "Vinnitsya"
             };
             // Act           
-            var result = controller.PostCity(city) as CreatedAtRouteNegotiatedContentResult<SelectedCity>;
+            var result = controller.PostCityAsync(city) as CreatedAtRouteNegotiatedContentResult<SelectedCity>;
             // Assert
             Assert.IsInstanceOf<CreatedAtRouteNegotiatedContentResult<SelectedCity>>(result);
             Assert.IsTrue(result.Content.Id == city.Id);
@@ -129,7 +129,7 @@ namespace WeatherApp.Tests.Tests
             var controller = DependencyResolver.Current.GetService<CitiesController>();
             SelectedCity city = null;
             // Act           
-            var result = controller.PostCity(city) as BadRequestResult;
+            var result = controller.PostCityAsync(city) as BadRequestResult;
             // Assert
             Assert.IsInstanceOf<BadRequestResult>(result);
         }
@@ -141,7 +141,7 @@ namespace WeatherApp.Tests.Tests
             var id = 5;
             var controller = DependencyResolver.Current.GetService<CitiesController>();
             // Act
-            var result = controller.DeleteCity(id) as OkNegotiatedContentResult<SelectedCity>;
+            var result = controller.DeleteCityAsync(id) as OkNegotiatedContentResult<SelectedCity>;
             // Assert
             Assert.IsInstanceOf<OkNegotiatedContentResult<SelectedCity>>(result);
             Assert.IsTrue(result.Content.Id == id);
@@ -154,7 +154,7 @@ namespace WeatherApp.Tests.Tests
             var id = 100;  // doesn't exist id
             var controller = DependencyResolver.Current.GetService<CitiesController>();
             // Act
-            var result = controller.DeleteCity(id) as NotFoundResult;
+            var result = controller.DeleteCityAsync(id) as NotFoundResult;
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
