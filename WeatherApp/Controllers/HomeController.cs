@@ -61,8 +61,8 @@ namespace WeatherApp.Controllers
         /// </summary>
         private void InitForm()
         {
-            ViewBag.Cities = paramService.GetCities();
-            ViewBag.Periods = paramService.GetPeriods();
+            ViewBag.Cities = paramService.GetCitiesAsync().Result;
+            ViewBag.Periods = paramService.GetPeriodsAsync().Result;
         }
     }
 }
