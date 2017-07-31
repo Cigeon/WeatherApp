@@ -3,7 +3,7 @@ div.wrapper {
     display: block;
     width: 960px;
     max-width: 100%;
-    margin: 10px auto 0 auto;
+    margin: 20px auto 0 auto;
     padding: 0;
     text-align: left;
 }
@@ -36,4 +36,30 @@ div.wrapper {
     left: 5%; 
     height: 100px;
     bottom: 0;
+} 
+
+#container {    
+    display: flex;
+    justify-content: center;
+    position: relative;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    padding: 20px;
+    background: white;
+}
+
+#container::after {
+    content: '';
+    position: absolute;
+    z-index: -1; 
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    left: 5%; 
+    height: 100px;
+    bottom: 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
 }

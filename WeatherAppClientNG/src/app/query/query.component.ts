@@ -2,36 +2,46 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdSelectModule } from '@angular/material';
 
+import { City } from '../models/city';
+import { Period } from '../models/period';
+
 @Component({
   selector: 'app-query',
   templateUrl: './query.component.html',
   styleUrls: ['./query.component.css']
 })
 export class QueryComponent implements OnInit {
-  foods = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
-  text: string;
-
-  powers = ['Really Smart', 'Super Flexible',
-            'Super Hot', 'Weather Changer'];
-
-  model = {
-    name: 'sdkff',
-    alterEgo: 'dkfk',
-    power: 'dff'
-  };
-
-  submitted = false;
-
-  onSubmit() { this.submitted = true; }
+  selectedCity: string;
+  selectedPeriod: string;
+  cities: City[];
+  periods: Period[];
 
   constructor() { }
 
+  showForecast() {
+    console.log(this.selectedCity);
+  }
+
   ngOnInit() {
-    this.text = 'hello';
+    this.cities = [{
+      Id: 1,
+      Text: 'Kyiv',
+      Value: 'Kyiv2'
+    }, {
+      Id: 2,
+      Text: 'Lviv',
+      Value: 'Lviv2'
+    }];
+
+    this.periods = [{
+      Id: 1,
+      Text: 'Current',
+      Value: '1'
+    }, {
+      Id: 2,
+      Text: 'For 3 days',
+      Value: '3'
+    }];
   }
 
 }
