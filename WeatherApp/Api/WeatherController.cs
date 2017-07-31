@@ -55,7 +55,7 @@ namespace WeatherApp.Api
             // Save forecast to history
             try
             {
-                historyService.SaveForecast(forecast);
+                await historyService.SaveForecastAsync(forecast);
             }
             catch (Exception)
             {

@@ -21,7 +21,7 @@ namespace WeatherApp.Controllers
         // GET: History
         public ActionResult Index()
         {
-            return View(historyService.GetForecasts());
+            return View(historyService.GetForecastsAsync().Result);
         }
 
         // GET: History/Details/5
@@ -30,7 +30,7 @@ namespace WeatherApp.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var forecast = historyService.GetForecastById(id);
+            var forecast = historyService.GetForecastByIdAsync(id).Result;
 
             if (forecast == null)
                 return HttpNotFound();
@@ -44,7 +44,7 @@ namespace WeatherApp.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var forecast = historyService.GetForecastById(id);
+            var forecast = historyService.GetForecastByIdAsync(id).Result;
 
             if (forecast == null)
                 return HttpNotFound();
@@ -57,7 +57,7 @@ namespace WeatherApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            historyService.DeleteForecast(id);
+            historyService.DeleteForecastAsync(id).Wait();
             return RedirectToAction("Index");
         }
 

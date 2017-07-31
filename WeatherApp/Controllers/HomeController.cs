@@ -46,7 +46,7 @@ namespace WeatherApp.Controllers
                 // Get forecast from open weather
                 var forecast = weatherService.GetWeatherForecastAsync(weatherRequest).Result;
                 // Save weather forecast                
-                historyService.SaveForecast(forecast);
+                historyService.SaveForecastAsync(forecast).Wait();
                 
                 return View("ViewWeatherForecast", forecast);
             }

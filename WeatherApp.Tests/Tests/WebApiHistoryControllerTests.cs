@@ -19,7 +19,7 @@ namespace WeatherApp.Tests.Tests
             // Arrange
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             // Act
-            var result = controller.GetForecasts();
+            var result = controller.GetForecastsAsync();
             // Assert
             Assert.IsInstanceOf<List<WeatherForecast>>(result);
         }
@@ -31,7 +31,7 @@ namespace WeatherApp.Tests.Tests
             var id = 1;
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             // Act
-            var result = controller.GetForecast(id) as OkNegotiatedContentResult<WeatherForecast>;
+            var result = controller.GetForecastAsync(id) as OkNegotiatedContentResult<WeatherForecast>;
             // Assert
             Assert.IsInstanceOf<OkNegotiatedContentResult<SelectedCity>>(result);
             Assert.IsTrue(result.Content.Id == id);
@@ -44,7 +44,7 @@ namespace WeatherApp.Tests.Tests
             var id = 100;  // doesn't exist id
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             // Act
-            var result = controller.GetForecast(id) as NotFoundResult;
+            var result = controller.GetForecastAsync(id) as NotFoundResult;
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
@@ -59,7 +59,7 @@ namespace WeatherApp.Tests.Tests
                 Id = 1
             };
             // Act           
-            var result = controller.PutForecast(forecast.Id, forecast) as StatusCodeResult;
+            var result = controller.PutForecastAsync(forecast.Id, forecast) as StatusCodeResult;
             // Assert
             Assert.IsInstanceOf<StatusCodeResult>(result);
             Assert.IsTrue(result.StatusCode.Equals(HttpStatusCode.NoContent));
@@ -72,7 +72,7 @@ namespace WeatherApp.Tests.Tests
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             var forecast = GetDummyForecast();
             // Act           
-            var result = controller.PutForecast(forecast.Id++, forecast) as BadRequestResult;
+            var result = controller.PutForecastAsync(forecast.Id++, forecast) as BadRequestResult;
             // Assert
             Assert.IsInstanceOf<BadRequestResult>(result);
         }
@@ -85,7 +85,7 @@ namespace WeatherApp.Tests.Tests
             var forecast = GetDummyForecast();
             forecast.Id = -1;
             // Act           
-            var result = controller.PutForecast(forecast.Id, forecast) as NotFoundResult;
+            var result = controller.PutForecastAsync(forecast.Id, forecast) as NotFoundResult;
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
@@ -97,7 +97,7 @@ namespace WeatherApp.Tests.Tests
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             var forecast = GetDummyForecast();
             // Act           
-            var result = controller.PostForecast(forecast) as CreatedAtRouteNegotiatedContentResult<WeatherForecast>;
+            var result = controller.PostForecastAsync(forecast) as CreatedAtRouteNegotiatedContentResult<WeatherForecast>;
             // Assert
             Assert.IsInstanceOf<CreatedAtRouteNegotiatedContentResult<WeatherForecast>>(result);
             Assert.IsTrue(result.Content.Id == forecast.Id);
@@ -110,7 +110,7 @@ namespace WeatherApp.Tests.Tests
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             WeatherForecast forecast = null;
             // Act           
-            var result = controller.PostForecast(forecast) as BadRequestResult;
+            var result = controller.PostForecastAsync(forecast) as BadRequestResult;
             // Assert
             Assert.IsInstanceOf<BadRequestResult>(result);
         }
@@ -122,7 +122,7 @@ namespace WeatherApp.Tests.Tests
             var id = 1;
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             // Act
-            var result = controller.DeleteForecast(id) as OkNegotiatedContentResult<WeatherForecast>;
+            var result = controller.DeleteForecastAsync(id) as OkNegotiatedContentResult<WeatherForecast>;
             // Assert
             Assert.IsInstanceOf<OkNegotiatedContentResult<WeatherForecast>>(result);
             Assert.IsTrue(result.Content.Id == id);
@@ -135,7 +135,7 @@ namespace WeatherApp.Tests.Tests
             var id = 100;  // doesn't exist id
             var controller = DependencyResolver.Current.GetService<HistoryController>();
             // Act
-            var result = controller.DeleteForecast(id) as NotFoundResult;
+            var result = controller.DeleteForecastAsync(id) as NotFoundResult;
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
