@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WeatherApp.Models;
@@ -18,7 +19,7 @@ namespace WeatherApp.Services
         /// Add period for selection
         /// </summary>
         /// <param name="period"></param>
-        public void AddParameter(SelectedPeriod period)
+        public async Task AddParameterAsync(SelectedPeriod period)
         {
             
         }
@@ -27,7 +28,7 @@ namespace WeatherApp.Services
         /// Get the cities list for UI
         /// </summary>
         /// <returns></returns>
-        public List<SelectListItem> GetCities()
+        public async Task<List<SelectListItem>> GetCitiesAsync()
         {
             List<SelectListItem> cities = new List<SelectListItem>();
             cities.Add(new SelectListItem() { Text = "Kyiv", Value = "Kyiv" });
@@ -41,7 +42,7 @@ namespace WeatherApp.Services
         /// Get the periods list for UI
         /// </summary>
         /// <returns></returns>
-        public List<SelectListItem> GetPeriods()
+        public async Task<List<SelectListItem>> GetPeriodsAsync()
         {
             List<SelectListItem> periods = new List<SelectListItem>();
             periods.Add(new SelectListItem() { Text = "Current weather", Value = "1" });
@@ -53,7 +54,7 @@ namespace WeatherApp.Services
         /// Get the periods list for API
         /// </summary>
         /// <returns></returns>
-        public List<SelectedPeriod> GetPeriodsForApi()
+        public async Task<List<SelectedPeriod>> GetPeriodsForApiAsync()
         {
             List<SelectedPeriod> periods = new List<SelectedPeriod>();
             periods.Add(new SelectedPeriod() { Text = "Current weather", Value = "1" });

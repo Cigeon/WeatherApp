@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherApp.Models;
 using WeatherApp.Services;
@@ -20,7 +21,7 @@ namespace WeatherApp.Repositories
         /// Add period for selection
         /// </summary>
         /// <param name="period"></param>
-        public void AddParameter(SelectedPeriod period)
+        public async Task AddParameterAsync(SelectedPeriod period)
         {
             db.SelectedPeriods.Add(period);
             db.SaveChanges();
@@ -30,7 +31,7 @@ namespace WeatherApp.Repositories
         /// Get list of selected cities for UI
         /// </summary>
         /// <returns></returns>
-        public List<SelectListItem> GetCities()
+        public async Task<List<SelectListItem>> GetCitiesAsync()
         {
             var cities = db.SelectedCities.Select(item => new SelectListItem()
             {
@@ -46,7 +47,7 @@ namespace WeatherApp.Repositories
         /// Get list of selected periods for UI
         /// </summary>
         /// <returns></returns>
-        public List<SelectListItem> GetPeriods()
+        public async Task<List<SelectListItem>> GetPeriodsAsync()
         {
             var periods = db.SelectedPeriods.Select(item => new SelectListItem()
             {
@@ -61,7 +62,7 @@ namespace WeatherApp.Repositories
         /// Get list of selected periods for API
         /// </summary>
         /// <returns></returns>
-        public List<SelectedPeriod> GetPeriodsForApi()
+        public async Task<List<SelectedPeriod>> GetPeriodsForApiAsync()
         {
             var periods = db.SelectedPeriods.ToList();
             return periods;

@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WeatherApp.Models;
@@ -23,16 +24,16 @@ namespace WeatherApp.Api
         }
 
         // GET: api/History
-        public List<WeatherForecast> GetForecasts()
+        public async Task<List<WeatherForecast>> GetForecastsAsync()
         {
-            return historyRepo.GetForecasts();
+            return await historyRepo.GetForecastsAsync();
         }
 
         // GET: api/History/5
         [ResponseType(typeof(WeatherForecast))]
-        public IHttpActionResult GetForecast(int id)
+        public async Task<IHttpActionResult> GetForecastAsync(int id)
         {
-            var weatherForecast = historyRepo.GetForecastById(id);
+            var weatherForecast = await historyRepo.GetForecastByIdAsync(id);
             if (weatherForecast == null)
             {
                 return NotFound();
@@ -43,7 +44,7 @@ namespace WeatherApp.Api
 
         // PUT: api/History/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutForecast(int id, WeatherForecast forecast)
+        public async Task<IHttpActionResult> PutForecastAsync(int id, WeatherForecast forecast)
         {
             if (!ModelState.IsValid)
             {
@@ -53,11 +54,11 @@ namespace WeatherApp.Api
             if (id != forecast.Id)
             {
                 return BadRequest();
-            }            
+            }
 
             try
             {
-                historyRepo.EditForecast(forecast);
+                await historyRepo.EditForecastAsync(forecast);
             }
             catch (Exception)
             {
@@ -76,7 +77,7 @@ namespace WeatherApp.Api
 
         // POST: api/History
         [ResponseType(typeof(WeatherForecast))]
-        public IHttpActionResult PostForecast(WeatherForecast forecast)
+        public async Task<IHttpActionResult> PostForecastAsync(WeatherForecast forecast)
         {
             if (!ModelState.IsValid)
             {
@@ -90,7 +91,7 @@ namespace WeatherApp.Api
 
             try
             {
-                historyRepo.SaveForecast(forecast);
+                await historyRepo.SaveForecastAsync(forecast);
             }
             catch (Exception)
             {
@@ -102,9 +103,9 @@ namespace WeatherApp.Api
 
         // DELETE: api/History/5
         [ResponseType(typeof(WeatherForecast))]
-        public IHttpActionResult DeleteForecast(int id)
+        public async Task<IHttpActionResult> DeleteForecastAsync(int id)
         {
-            var forecast = historyRepo.GetForecastById(id);            
+            var forecast = await historyRepo.GetForecastByIdAsync(id);
 
             if (forecast == null)
             {
@@ -113,7 +114,7 @@ namespace WeatherApp.Api
 
             try
             {
-                historyRepo.DeleteForecast(id);
+                await historyRepo.DeleteForecastAsync(id);
             }
             catch (Exception)
             {
@@ -141,7 +142,7 @@ namespace WeatherApp.Api
 
         private bool ForecastExists(int id)
         {
-            return historyRepo.GetForecasts().Count(e => e.Id == id) > 0;
+            return historyRepo.GetForecastsAsync().Result.Count(e => e.Id == id) > 0;
         }
     }
 }

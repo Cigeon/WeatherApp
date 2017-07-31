@@ -9,6 +9,6 @@ namespace WeatherApp.Services
 {
     public interface IWeatherService
     {
-        WeatherForecast GetWeatherForecast(WeatherRequest weatherRequest);
+        Task<WeatherForecast> GetWeatherForecastAsync(WeatherRequest weatherRequest);
     }
 }
