@@ -58,7 +58,8 @@ namespace WeatherApp.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync(param).ConfigureAwait(false);
+                //HttpResponseMessage response = await client.GetAsync(param).ConfigureAwait(false);
+                HttpResponseMessage response = await client.GetAsync(param);
                 if (response.IsSuccessStatusCode)
                 {
                     json = await response.Content.ReadAsStringAsync();                    

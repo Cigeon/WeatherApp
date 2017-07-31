@@ -18,7 +18,7 @@ namespace WeatherApp.Controllers
         // GET: City
         public ActionResult Index()
         {
-            return View(cityService.GetCities());
+            return View(cityService.GetCitiesAsync().Result);
         }
 
         // GET: City/Details/5
@@ -27,7 +27,7 @@ namespace WeatherApp.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             
-            SelectedCity selectedCity = cityService.GetCityById(id);
+            SelectedCity selectedCity = cityService.GetCityByIdAsync(id).Result;
 
             if (selectedCity == null)
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace WeatherApp.Controllers
             if (ModelState.IsValid)
             {                
                 // Save created city to repository
-                cityService.AddCity(selectedCity);
+                cityService.AddCityAsync(selectedCity).Wait();
 
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace WeatherApp.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             
-            SelectedCity selectedCity = cityService.GetCityById(id);
+            SelectedCity selectedCity = cityService.GetCityByIdAsync(id).Result;
 
             if (selectedCity == null)
                 return HttpNotFound();
@@ -83,7 +83,7 @@ namespace WeatherApp.Controllers
             if (ModelState.IsValid)
             {
                 // Save modified city to repository
-                cityService.EditCity(selectedCity);
+                cityService.EditCityAsync(selectedCity).Wait();
 
                 return RedirectToAction("Index");
             }
@@ -96,7 +96,7 @@ namespace WeatherApp.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             
-            SelectedCity selectedCity = cityService.GetCityById(id);
+            SelectedCity selectedCity = cityService.GetCityByIdAsync(id).Result;
             if (selectedCity == null)
                 return HttpNotFound();
             
@@ -108,7 +108,7 @@ namespace WeatherApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            cityService.DeleteCity(id);
+            cityService.DeleteCityAsync(id).Wait();
             return RedirectToAction("Index");
         }
 
