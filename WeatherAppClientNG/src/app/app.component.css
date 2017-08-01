@@ -5,6 +5,22 @@
   flex: 1 1 auto;
 }
 
+.logo-wrap {
+    display: flex;
+}
+
+.logo {
+    width: 100%;
+
+}
+
+.logo img {
+    display: block;
+    width: 50%; 
+    margin: 0 3px;
+    float: right;
+}
+
 md-toolbar a {
     color: white;
     text-decoration: none;

@@ -1,3 +1,38 @@
-<p>
-  history works!
-</p>
+<div class="wrapper row-wrap">
+  <h2>Previous requests</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>City</th>
+                <th>Period</th>
+                <th>Details</th>
+                <th>Delete</th>
+            </tr>            
+        </thead>
+        <tbody>
+            <tr *ngFor="let forecast of forecasts">
+                <td>
+                    {{forecast.Id}}
+                </td>
+                <td>
+                    {{ forecast.Dt | date:'medium' }}
+                </td>
+                <td>
+                    {{forecast.ReqCity}}                   
+                </td>  
+                <td>
+                    {{forecast.ReqPeriod}}                   
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default" (click)="showDetails(forecast)">Details</button>                    
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="deleteForecast(forecast)">Delete</button>                  
+                </td>
+            </tr>            
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" (click)="goBack()">Back</button> 
+</div>

@@ -1,5 +1,6 @@
 <div *ngIf="forecast" class="wrapper row">
-    <h2>{{forecast.ReqCity}} ({{forecast.City.Name}}), wather forecast for {{forecast.ReqPeriod}} day(s)</h2>
+    <h2>The weather request for {{ forecast.Dt | date:'medium' }}</h2>
+    <h3>{{forecast.ReqCity}} ({{forecast.City.Name}}), wather forecast for {{forecast.ReqPeriod}} day(s)</h3>
     <br />
     <br />
     <table class="table">
@@ -49,3 +50,4 @@
     <br />
     <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>  
 </div>
+
