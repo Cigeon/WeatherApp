@@ -13,7 +13,7 @@ export class WeatherService {
     private http: Http
   ) { }
 
-  getForecast(city: string, period: number): Promise<Forecast> {
+  getForecast(city: string, period: string): Promise<Forecast> {
     return this.http.get(`${server}/api/Weather/${city}/${period}`)
       .toPromise()
       .then(response => response.json() as Forecast);

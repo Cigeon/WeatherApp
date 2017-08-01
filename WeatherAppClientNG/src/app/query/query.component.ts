@@ -45,9 +45,7 @@ export class QueryComponent implements OnInit {
   }
 
   showForecast() {
-    console.log(this.selectedCity);
-    console.log(this.selectedPeriod);
-    this.router.navigate([`forecast/${this.selectedCity}/${this.selectedPeriod}`]);
+    this.router.navigate(['forecast/', this.selectedCity, this.selectedPeriod]);
   }
 
 }

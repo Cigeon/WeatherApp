@@ -9,16 +9,8 @@ import { HistoryComponent } from '../history/history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/query', pathMatch: 'full' },
-  { path: 'query',
-    component: QueryComponent,
-    // children: [
-    //     {
-    //       path: ':city/:period',
-    //       component: ForecastComponent
-    //     }
-    //   ]
-  },
-  { path: 'forecast/:city/:period',   component: CitiesComponent },
+  { path: 'query', component: QueryComponent  },
+  { path: 'forecast/:city/:period',   component: ForecastComponent },
   { path: 'cities',   component: CitiesComponent },
   { path: 'history',  component: HistoryComponent }
 ];

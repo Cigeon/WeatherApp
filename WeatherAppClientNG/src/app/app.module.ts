@@ -16,9 +16,10 @@ import { AppComponent } from './app.component';
 import { QueryComponent } from './query/query.component';
 import { CitiesComponent } from './cities/cities.component';
 import { HistoryComponent } from './history/history.component';
+import { ForecastComponent } from './forecast/forecast.component';
 
 import { ParamsService } from './services/params.service';
-import { ForecastComponent } from './forecast/forecast.component';
+import { WeatherService } from './services/weather.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { ForecastComponent } from './forecast/forecast.component';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [ParamsService],
+  providers: [ParamsService, WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
