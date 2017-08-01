@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdSelectModule } from '@angular/material';
+import { Router } from '@angular/router';
 
 import { ParamsService } from '../services/params.service';
 import { City } from '../models/city';
@@ -19,6 +20,7 @@ export class QueryComponent implements OnInit {
 
   constructor(
     private parameters: ParamsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -44,6 +46,8 @@ export class QueryComponent implements OnInit {
 
   showForecast() {
     console.log(this.selectedCity);
+    console.log(this.selectedPeriod);
+    this.router.navigate([`forecast/${this.selectedCity}/${this.selectedPeriod}`]);
   }
 
 }

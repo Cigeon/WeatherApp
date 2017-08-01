@@ -18,13 +18,15 @@ import { CitiesComponent } from './cities/cities.component';
 import { HistoryComponent } from './history/history.component';
 
 import { ParamsService } from './services/params.service';
+import { ForecastComponent } from './forecast/forecast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QueryComponent,
     CitiesComponent,
-    HistoryComponent
+    HistoryComponent,
+    ForecastComponent
   ],
   imports: [
     BrowserModule,

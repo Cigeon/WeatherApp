@@ -6,11 +6,11 @@
 	<div id="container">
     <div class="form-group">
 
-      <md-select placeholder="Select city" [(ngModel)]="selectedCity">
+      <md-select class="item" placeholder="Select city" [(ngModel)]="selectedCity">
         <md-option *ngFor="let city of cities" [value]="city.Value">{{ city.Value }}</md-option>
       </md-select>
 
-      <md-input-container>
+      <md-input-container class="item">
         <input mdInput placeholder="or type here" [(ngModel)]="selectedCity">
       </md-input-container>
 
@@ -21,6 +21,8 @@
       <button md-raised-button (click)="showForecast()">SHOW FORECAST</button>
 
     </div>
+    <router-outlet></router-outlet>
 	</div>
 </div>
+
 
