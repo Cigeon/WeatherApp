@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherApp.Models;
 using WeatherApp.Services;
@@ -31,7 +32,7 @@ namespace WeatherApp.Controllers
 
             if (selectedCity == null)
                 return HttpNotFound();
-            
+
             return View(selectedCity);
         }
 
@@ -49,7 +50,7 @@ namespace WeatherApp.Controllers
         public ActionResult Create([Bind(Include = "Id,Text,Value")] SelectedCity selectedCity)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 // Save created city to repository
                 cityService.AddCityAsync(selectedCity).Wait();
 
@@ -69,7 +70,7 @@ namespace WeatherApp.Controllers
 
             if (selectedCity == null)
                 return HttpNotFound();
-            
+
             return View(selectedCity);
         }
 
@@ -97,9 +98,10 @@ namespace WeatherApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             
             SelectedCity selectedCity = cityService.GetCityByIdAsync(id).Result;
+
             if (selectedCity == null)
                 return HttpNotFound();
-            
+
             return View(selectedCity);
         }
 

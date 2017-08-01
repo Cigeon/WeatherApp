@@ -1,0 +1,53 @@
+<div *ngIf="forecast" class="wrapper row">
+    <h2>The weather request for {{ forecast.Dt | date:'medium' }}</h2>
+    <h3>{{forecast.ReqCity}} ({{forecast.City.Name}}), wather forecast for {{forecast.ReqPeriod}} day(s)</h3>
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th *ngFor="let weather of forecast.List">{{ convertDate(weather.Dt) | date:'MMM d' }}</th>
+            </tr>            
+        </thead>
+        <tbody>
+            <tr>
+                <th>Temperature, °C</th>
+                <th *ngFor="let weather of forecast.List">{{weather.Temp.Min}}...{{weather.Temp.Max}}</th>
+            </tr>
+            <tr>
+                <th>Pressure, mmHg</th>
+                <th *ngFor="let weather of forecast.List">{{weather.Pressure}}</th>
+            </tr>
+            <tr>
+                <th>Humidity, %</th>
+                <th *ngFor="let weather of forecast.List">{{weather.Humidity}}</th>
+            </tr>
+            <tr>
+                <th>Wind speed , m/s</th>
+                <th *ngFor="let weather of forecast.List">{{weather.Speed}}</th>
+            </tr>
+            <tr>
+                <th>Wind direction, ∠</th>
+                <th *ngFor="let weather of forecast.List">{{weather.Deg}}</th>
+            </tr>
+            <tr>
+                <th>Cloudiness, %</th>
+                <th *ngFor="let weather of forecast.List">{{weather.Clouds}}</th>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <th *ngFor="let weather of forecast.List">{{weather.Weather[0].Description}}</th>
+            </tr>
+            <tr>
+                <th>Icon</th>
+                <th *ngFor="let weather of forecast.List">
+                  <img [src]='"/assets/images/" + weather.Weather[0].Icon + ".png"' /> 
+                </th>
+            </tr>
+        </tbody> 
+    </table>
+    <br />
+    <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>  
+</div>
+

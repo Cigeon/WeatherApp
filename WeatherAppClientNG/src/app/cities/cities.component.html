@@ -1,0 +1,34 @@
+<div class="wrapper row-wrap">
+  <h2>Cities</h2>
+    <div class="new-city">
+        <input name="new-city" type="text" placeholder="Add new city.." class="item form-control" [(ngModel)]="newCity">
+        <button type="button" class="item btn btn-primary" (click)="addCity()">Add</button>        
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>            
+        </thead>
+        <tbody>
+            <tr *ngFor="let city of cities" class="tbl-row">
+                <td>
+                    {{city.Id}}
+                </td>
+                <td>
+                    <input type="text" name="city-name" class="inp-city form-control" [(ngModel)]="city.Value">                   
+                </td>  
+                <td>
+                    <button type="button" class="btn btn-default" (click)="updateCity(city)">Update</button>                    
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="deleteCity(city)">Delete</button>                  
+                </td>
+            </tr>            
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" (click)="goBack()">Back</button> 
+</div>

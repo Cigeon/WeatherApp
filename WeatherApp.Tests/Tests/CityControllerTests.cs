@@ -18,7 +18,7 @@ namespace WeatherApp.Tests.Tests
             var controller = DependencyResolver.Current.GetService<CityController>();           
 
             // Act
-            var result = controller.Index() as ViewResult;
+            var result = controller.IndexAsync() as ViewResult;
             // Assert
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.IsInstanceOf<IEnumerable<SelectedCity>>(result.Model);
@@ -30,7 +30,7 @@ namespace WeatherApp.Tests.Tests
             // Arrange
             var controller = DependencyResolver.Current.GetService<CityController>();
             // Act
-            var result = controller.Details(null) as HttpStatusCodeResult;
+            var result = controller.DetailsAsync(null) as HttpStatusCodeResult;
             // Assert
             Assert.AreEqual((int)HttpStatusCode.BadRequest, result.StatusCode);
         }
@@ -41,7 +41,7 @@ namespace WeatherApp.Tests.Tests
             // Arrange
             var controller = DependencyResolver.Current.GetService<CityController>();
             // Act
-            var result = controller.Details(0) as HttpNotFoundResult;
+            var result = controller.DetailsAsync(0) as HttpNotFoundResult;
             // Assert
             Assert.IsInstanceOf<HttpNotFoundResult>(result);
         }
@@ -52,7 +52,7 @@ namespace WeatherApp.Tests.Tests
             // Arrange
             var controller = DependencyResolver.Current.GetService<CityController>();
             // Act
-            var result = controller.Details(1) as ViewResult;
+            var result = controller.DetailsAsync(1) as ViewResult;
             // Assert
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.IsInstanceOf<SelectedCity>(result.Model);

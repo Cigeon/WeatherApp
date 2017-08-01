@@ -1,0 +1,27 @@
+<div class="wrapper row1"> 
+  <section id="slider">
+    <img src="assets/images/family.png" alt="Happy family" />
+  </section>
+
+	<div id="container">
+    <div class="form-group">
+
+      <md-select class="item" placeholder="Select city" [(ngModel)]="selectedCity">
+        <md-option *ngFor="let city of cities" [value]="city.Value">{{ city.Value }}</md-option>
+      </md-select>
+
+      <md-input-container class="item">
+        <input mdInput placeholder="or type here" [(ngModel)]="selectedCity">
+      </md-input-container>
+
+      <md-select class="item" placeholder="Select period" [(ngModel)]="selectedPeriod">
+        <md-option *ngFor="let period of periods" [value]="period.Value">{{ period.Text }}</md-option>
+      </md-select>
+
+      <button class="item" md-raised-button (click)="showForecast()">SHOW FORECAST</button>
+
+    </div>
+	</div>
+</div>
+
+

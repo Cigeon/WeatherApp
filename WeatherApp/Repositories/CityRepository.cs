@@ -28,7 +28,7 @@ namespace WeatherApp.Repositories
             c.Value = city.Text;
 
             db.SelectedCities.Add(c);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace WeatherApp.Repositories
             c.Value = city.Text;
 
             db.Entry(c).State = EntityState.Modified;
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace WeatherApp.Repositories
             if (id == null) return null;
             try
             {
-                return db.SelectedCities.Find(id);
+                return await db.SelectedCities.FindAsync(id);
             }
             catch (InvalidOperationException)
             {
@@ -83,7 +83,7 @@ namespace WeatherApp.Repositories
         {
             try
             {
-                return db.SelectedCities.ToList();
+                return await db.SelectedCities.ToListAsync();
             }
             catch (InvalidOperationException)
             {
