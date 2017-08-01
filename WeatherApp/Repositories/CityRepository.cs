@@ -72,7 +72,7 @@ namespace WeatherApp.Repositories
             catch (InvalidOperationException)
             {
                 return null;
-            }            
+            }
         }
 
         /// <summary>

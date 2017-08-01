@@ -18,9 +18,9 @@ namespace WeatherApp.App_Start
 
             // Add default periods to dropdown list "Select period"
             var paramRepo = new ParametersRepository();
-            paramRepo.AddParameter(new SelectedPeriod { Text = "Current weather", Value = "1" });
-            paramRepo.AddParameter(new SelectedPeriod { Text = "For 3 days", Value = "3" });
-            paramRepo.AddParameter(new SelectedPeriod { Text = "For 7 days", Value = "7" });
+            paramRepo.AddParameterAsync(new SelectedPeriod { Text = "Current weather", Value = "1" });
+            paramRepo.AddParameterAsync(new SelectedPeriod { Text = "For 3 days", Value = "3" });
+            paramRepo.AddParameterAsync(new SelectedPeriod { Text = "For 7 days", Value = "7" });
 
             context.SaveChanges();
         }

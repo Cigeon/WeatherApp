@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using WeatherApp.Models;
 using WeatherApp.Services;
 
@@ -20,7 +21,7 @@ namespace WeatherApp.Repositories
         /// Get list of forecasts
         /// </summary>
         /// <returns></returns>
-        public List<WeatherForecast> GetForecasts()
+        public async Task<List<WeatherForecast>> GetForecastsAsync()
         {
             try
             {
@@ -32,7 +33,7 @@ namespace WeatherApp.Repositories
             {
                 return new List<WeatherForecast>();
             }
-            
+
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace WeatherApp.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public WeatherForecast GetForecastById(int? id)
+        public async Task<WeatherForecast> GetForecastByIdAsync(int? id)
         {
             try
             {
@@ -59,7 +60,7 @@ namespace WeatherApp.Repositories
         /// Save forecast to database
         /// </summary>
         /// <param name="forecast"></param>
-        public void SaveForecast(WeatherForecast forecast)
+        public async Task SaveForecastAsync(WeatherForecast forecast)
         {
             // Add timestamp to forecast
             forecast.Dt = DateTime.Now;
@@ -72,7 +73,7 @@ namespace WeatherApp.Repositories
         /// Edit forecast and save it to database
         /// </summary>
         /// <param name="forecast"></param>
-        public void EditForecast(WeatherForecast forecast)
+        public async Task EditForecastAsync(WeatherForecast forecast)
         {
             db.Entry(forecast).State = EntityState.Modified;
             db.SaveChanges();
@@ -82,7 +83,7 @@ namespace WeatherApp.Repositories
         /// Delete forecast from database
         /// </summary>
         /// <param name="id"></param>
-        public void DeleteForecast(int id)
+        public async Task DeleteForecastAsync(int id)
         {
             var forecast = db.WeatherForecasts
                                 .Include(ei => ei.City)

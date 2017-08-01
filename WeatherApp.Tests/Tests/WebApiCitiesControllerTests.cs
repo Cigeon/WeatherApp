@@ -21,7 +21,7 @@ namespace WeatherApp.Tests.Tests
             // Arrange
             var controller = DependencyResolver.Current.GetService<CitiesController>();
             // Act
-            var result = controller.GetCities();
+            var result = controller.GetCitiesAsync();
             // Assert
             Assert.IsInstanceOf<List<SelectedCity>>(result);
             Assert.IsTrue(result.Count > 0);

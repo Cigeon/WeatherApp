@@ -22,7 +22,7 @@ namespace WeatherApp.Api
         }
 
         // GET: api/Cities
-        public async Task<List<SelectedCity>> GetCities()
+        public async Task<List<SelectedCity>> GetCitiesAsync()
         {
             return await cityRepo.GetCitiesAsync();
         }
