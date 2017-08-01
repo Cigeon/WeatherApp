@@ -19,6 +19,7 @@ import { HistoryComponent } from './history/history.component';
 import { ForecastComponent } from './forecast/forecast.component';
 
 import { ParamsService } from './services/params.service';
+import { CityService } from './services/city.service';
 import { WeatherService } from './services/weather.service';
 
 @NgModule({
@@ -41,7 +42,7 @@ import { WeatherService } from './services/weather.service';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [ParamsService, WeatherService],
+  providers: [ParamsService, CityService, WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

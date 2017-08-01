@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 import { WeatherService } from '../services/weather.service';
 import { Forecast } from '../models/weather/forecast';
+import { City } from '../models/city';
+import { Period } from '../models/period';
 
 
 import 'rxjs/add/operator/switchMap';
@@ -44,6 +47,10 @@ export class ForecastComponent implements OnInit {
             this.forecast = null;
           });
       });
+  }
+
+  convertDate(date: number) {
+    return new Date(1000 * date);
   }
 
   goBack(): void {

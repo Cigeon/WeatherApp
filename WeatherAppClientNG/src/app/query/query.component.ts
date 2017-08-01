@@ -4,6 +4,7 @@ import { MdSelectModule } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { ParamsService } from '../services/params.service';
+import { CityService } from '../services/city.service';
 import { City } from '../models/city';
 import { Period } from '../models/period';
 
@@ -19,7 +20,8 @@ export class QueryComponent implements OnInit {
   periods: Period[];
 
   constructor(
-    private parameters: ParamsService,
+    private paramsService: ParamsService,
+    private cityService: CityService,
     private router: Router
   ) { }
 
@@ -29,7 +31,7 @@ export class QueryComponent implements OnInit {
   }
 
   getCities() {
-    this.parameters.getCities()
+    this.cityService.getCities()
       .then(cities => {
         this.cities = cities;
         this.selectedCity = this.cities[0].Value;
@@ -37,7 +39,7 @@ export class QueryComponent implements OnInit {
   }
 
   getPeriods() {
-    this.parameters.getPeriods()
+    this.paramsService.getPeriods()
       .then(periods => {
         this.periods = periods;
         this.selectedPeriod = this.periods[0].Value;

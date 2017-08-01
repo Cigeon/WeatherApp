@@ -1,6 +1,18 @@
 import { City } from '../city';
 import { Period } from '../period';
 
+export class Forecast {
+    Id: number;
+    Dt: string;
+    City: WeatherCity;
+    Cod: string;
+    Message: number;
+    Cnt: number;
+    list: List[];
+    ReqCity: City;
+    ReqPeriod: Period;
+}
+
 export class WeatherCity {
     Id: number;
     Name: string;
@@ -43,16 +55,4 @@ export class Weather {
     Description: string;
     Icon: string;
     DailyForecastId: number;
-}
-
-export class Forecast {
-    Id: number;
-    Dt: string;
-    City: WeatherCity;
-    Cod: string;
-    Message: number;
-    Cnt: number;
-    list: List[];
-    ReqCity: City;
-    ReqPeriod: Period;
 }

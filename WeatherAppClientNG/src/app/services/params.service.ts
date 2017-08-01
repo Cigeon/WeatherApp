@@ -15,14 +15,6 @@ private headers: Headers = new Headers({'Content-Type': 'application/json'});
     private http: Http
   ) { }
 
-  getCities(): Promise<City[]> {
-    return this.http
-      .get(`${server}/api/Cities`)
-      .toPromise()
-      .then(response => response.json() as City[])
-      .catch(this.handleError);
-  }
-
   getPeriods(): Promise<Period[]> {
     return this.http
       .get(`${server}/api/Periods`)

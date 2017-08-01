@@ -1,0 +1,27 @@
+.wrapper {
+    display: block;
+    width: 640px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: left;
+}
+
+.row-wrap {
+    color: #777777;
+    background-color: #FFFFFF;
+    padding: 50px 0 160px 0;
+}
+
+.inp-city {
+    width: 85%;
+}
+
+.new-city {
+    display: flex;
+    margin: 40px 40px;
+}
+
+.item {
+    margin: 0 20px;
+}
