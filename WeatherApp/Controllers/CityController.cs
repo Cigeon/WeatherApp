@@ -17,13 +17,13 @@ namespace WeatherApp.Controllers
         }
 
         // GET: City
-        public async Task<ActionResult> IndexAsync()
+        public ActionResult Index()
         {
             return View(cityService.GetCitiesAsync().Result);
         }
 
         // GET: City/Details/5
-        public async Task<ActionResult> DetailsAsync(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -47,7 +47,7 @@ namespace WeatherApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync([Bind(Include = "Id,Text,Value")] SelectedCity selectedCity)
+        public ActionResult Create([Bind(Include = "Id,Text,Value")] SelectedCity selectedCity)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace WeatherApp.Controllers
         }
 
         // GET: City/Edit/5
-        public async Task<ActionResult> EditAsync(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -79,7 +79,7 @@ namespace WeatherApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAsync([Bind(Include = "Id,Text,Value")] SelectedCity selectedCity)
+        public ActionResult Edit([Bind(Include = "Id,Text,Value")] SelectedCity selectedCity)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace WeatherApp.Controllers
         }
 
         // GET: City/Delete/5
-        public async Task<ActionResult> DeleteAsync(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -108,7 +108,7 @@ namespace WeatherApp.Controllers
         // POST: City/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmedAsync(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
             cityService.DeleteCityAsync(id).Wait();
             return RedirectToAction("Index");
