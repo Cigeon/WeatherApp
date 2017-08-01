@@ -35,12 +35,10 @@ export class ForecastComponent implements OnInit {
       .subscribe(params => {
         const city = params['city'];
         const period = params['period'];
-        console.log(city);
         this.weather.getForecast(city, period)
           .then(forecast => {
             this.forecast = forecast;
             this.error = null;
-            console.log(forecast);
           })
           .catch(() => {
             this.error = 'not found';

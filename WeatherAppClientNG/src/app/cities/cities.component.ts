@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { CityService } from '../services/city.service';
 import { City } from '../models/city';
@@ -14,6 +15,7 @@ export class CitiesComponent implements OnInit {
 
   constructor(
     private cityService: CityService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -42,5 +44,9 @@ export class CitiesComponent implements OnInit {
   deleteCity(city: City) {
     this.cityService.deleteCity(city)
       .then(() => this.getCities());
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

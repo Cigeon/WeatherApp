@@ -63,3 +63,7 @@ div.wrapper {
     flex-direction: column;
     width: 30%;
 }
+
+.item {
+    margin: 10px;
+}

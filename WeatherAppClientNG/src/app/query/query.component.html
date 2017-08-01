@@ -14,11 +14,11 @@
         <input mdInput placeholder="or type here" [(ngModel)]="selectedCity">
       </md-input-container>
 
-      <md-select placeholder="Select period" [(ngModel)]="selectedPeriod">
+      <md-select class="item" placeholder="Select period" [(ngModel)]="selectedPeriod">
         <md-option *ngFor="let period of periods" [value]="period.Value">{{ period.Text }}</md-option>
       </md-select>
 
-      <button md-raised-button (click)="showForecast()">SHOW FORECAST</button>
+      <button class="item" md-raised-button (click)="showForecast()">SHOW FORECAST</button>
 
     </div>
 	</div>
