@@ -10,11 +10,14 @@ import { MdButtonModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { QueryComponent } from './query/query.component';
 import { CitiesComponent } from './cities/cities.component';
 import { HistoryComponent } from './history/history.component';
+
+import { ParamsService } from './services/params.service';
 
 @NgModule({
   declarations: [
@@ -33,8 +36,9 @@ import { HistoryComponent } from './history/history.component';
     MdInputModule,
     MdButtonModule,
     AppRoutingModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [ParamsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
